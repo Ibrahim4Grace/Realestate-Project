@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://bootswatch.com/4/journal/bootstrap.min.css">
+  <script>document.getElementsByTagName("html")[0].className += " js";</script>
+  <link rel="icon" href="../images/logos.jpg">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/stylesheet.css">
+  <title>Edit Admin</title>
+
+</head>
+<body>
+  <%- include(`partials/header2`); -%>
+  
+  <main class="cd-main-content">
+    <%- include(`partials/sidebar`); -%>
+  
+    <div class="cd-content-wrapper">
+      <div class="text-component text-center">
+
+        <div class="headers">
+
+          <h3 class="text-box1">My Admin </h3>
+          <div class="bottom-left">We are glad to see you again!</div>
+
+        </div>
+
+        <%- include (`./partials/messages`); -%>
+
+      
+            <div class="flex-agent-main">
+                <div class="main-properties">
+                    <div class="header-box">
+                        <h3 class="text-box">Edit Admin </h3>
+                    </div>
+
+                    <form action="/editAdmin/<%- adminResult._id %>" method="post">
+
+                        <div class="edit-agent">
+
+                            <div class="editagent-box1">
+
+                                <label for="">Admin Name:</label>
+                                <input class="agent-input" type="text" name="fullName"
+                                value="<%- adminResult.fullName %>" required><br>
+            
+                                <label for="">Admin Username:</label>
+                                <input class="agent-input" type="text" name="username"
+                                value="<%- adminResult.username %>" required><br>
+
+                                <label for="">Admin Password:</label>
+                                <input class="agent-input" type="password" name="password"
+                                value="<%- adminResult.password %>" required><br>
+
+                            </div>
+                            <div class="editagent-box2">
+
+                                
+                                <label for="">Admin Address:</label>
+                                <input class="agent-input" type="text" name="adminAddress"
+                                value="<%- adminResult.adminAddress %>" required><br>
+
+                                <label for="">Admin Number:</label>
+                                <input class="agent-input" type="text" name="adminNumber"
+                                value="<%- adminResult.adminNumber %>" required>
+                               
+                                <label for="">Admin Role:</label>
+                                <input class="agent-input" type="text" name="role"
+                                value="<%- adminResult.role %>" required><br>
+     
+                            </div>
+
+                            <button class="agent-btn">Update Agent Details</button>
+                        </div>
+
+
+                    </form>     
+                   
+                    
+
+                </div>
+
+            </div>
+
+       
+        
+      </div>
+    </div> <!-- .content-wrapper -->
+  </main> <!-- .cd-main-content -->
+  <script src="../assets/js/loopple/forminput.js"></script>   <!-- addPropertyForm -->
+  <script src="../js/util.js"></script> <!-- util functions included in the CodyHouse framework -->
+  <script src="../js/menu-aim.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

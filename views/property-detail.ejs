@@ -1,0 +1,176 @@
+
+<%- include(`partials/header`); -%>
+
+<div class="container">
+<div class="properties-listing spacer">
+
+<div class="row">
+<div class="col-lg-3 col-sm-4 hidden-xs">
+
+<div class="hot-properties hidden-xs">
+<h4>Hot Properties</h4>
+<div class="row">
+                <div class="col-lg-4 col-sm-5"><img src="../images/properties/4.jpg" class="img-responsive img-circle" alt="properties"/></div>
+                <div class="col-lg-8 col-sm-7">
+                  <h5><a href="/buysalerent">5bedrooms Duplex</a></h5>
+                  <p class="price">#650,000,000</p> </div>
+              </div>
+<div class="row">
+                <div class="col-lg-4 col-sm-5"><img src="../images/properties/1.jpg" class="img-responsive img-circle" alt="properties"/></div>
+                <div class="col-lg-8 col-sm-7">
+                  <h5><a href="/buysalerent">4bedrooms Duplex</a></h5>
+                  <p class="price">#550,000,000</p> </div>
+              </div>
+
+<div class="row">
+                <div class="col-lg-4 col-sm-5"><img src="../images/properties/3.jpg" class="img-responsive img-circle" alt="properties"/></div>
+                <div class="col-lg-8 col-sm-7">
+                  <h5><a href="/buysalerent">Mansion</a></h5>
+                  <p class="price">#900,000,000</p> </div>
+              </div>
+
+<div class="row">
+                <div class="col-lg-4 col-sm-5"><img src="../images/properties/2.jpg" class="img-responsive img-circle" alt="properties"/></div>
+                <div class="col-lg-8 col-sm-7">
+                  <h5><a href="/buysalerent">6bedrooms Duplex</a></h5>
+                  <p class="price">#700,000,000</p> </div>
+              </div>
+
+</div>
+
+
+
+<div class="advertisement">
+  <h4>Advertisements</h4>
+  <img src="../images/tablet-near.jpg" class="img-responsive" alt="advertisement">
+
+</div>
+
+</div>
+
+<div class="col-lg-9 col-sm-8 ">
+
+<h2 style="color:#64a30a;float:left ;"><%- properties.heading %></h2>
+<div class="row">
+  <div class="col-lg-8">
+  <div class="property-images">
+    <!-- Slider Starts -->
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators hidden-xs">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1" class=""></li>
+        <li data-target="#myCarousel" data-slide-to="2" class=""></li>
+        <li data-target="#myCarousel" data-slide-to="3" class=""></li>
+      </ol>
+      <div class="carousel-inner">
+
+         
+
+        <!-- Item 1 -->
+        <div class="item active">
+          <img class="properties" src="data:<%= properties.images[0].contentType %>;base64,<%= properties.images[0].data.toString('base64') %>"  alt="properties" >
+               
+        </div>
+        <!-- #Item 1 -->
+
+        <!-- Item 2 -->
+        <div class="item">
+          <img class="properties" src="data:<%= properties.images[1].contentType %>;base64,<%= properties.images[1].data.toString('base64') %>"  alt="properties" >
+               
+         
+        </div>
+        <!-- #Item 2 -->
+
+        <!-- Item 3 -->
+         <div class="item">
+          <img class="properties" src="data:<%= properties.images[2].contentType %>;base64,<%= properties.images[2].data.toString('base64') %>"  alt="properties" >
+        </div>
+        <!-- #Item 3 -->
+
+        <!-- Item 4 -->
+        <!-- <div class="item ">
+          <img src="images/properties/3.jpg" class="properties" alt="properties" />
+          
+        </div> -->
+        <!-- # Item 4 -->
+      </div>
+
+
+      <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+      <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+   </div>
+ <!-- #Slider Ends -->
+
+  </div>
+  
+
+
+
+  <div class="spacer"><h4><span class="glyphicon glyphicon-th-list"></span> Properties Detail</h4>
+  <p><%- properties.description %></p>
+
+
+  </div>
+  <div><h4><span class="glyphicon glyphicon-map-marker"></span> Location</h4>
+    <div class="well">
+        <iframe width="100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3969.0142481387967!2d3.349973414773918!3d6.610135995201189!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8eaf7d56ddc5%3A0x703d8f3847ab104f!2sIkeja%2C%20Lagos!5e0!3m2!1sen!2sng!4v1631085239066!5m2!1sen!2sng">
+
+        </iframe>
+    </div>
+  </div>
+
+  </div>
+  <div class="col-lg-44">
+  <div class="col-lg-12  col-sm-6">
+ <div class="property-info">
+ <p class="price"><%- properties.amount %></p>
+  <p class="area"><span class="glyphicon glyphicon-map-marker">
+     </span> <%- properties.address %> <%- properties.countryCity%> <%- properties.countryState %> <%- properties.country %>
+  </p>
+  
+  <div class="profile">
+  <span class="glyphicon glyphicon-user"></span> Agent Details
+  <p><%- properties.contactPerson %><br><%- properties.agentNumber %></p>
+  </div>
+ </div>
+
+    <h6><span style="margin-left:15px" class="glyphicon glyphicon-home"></span> Availabilty</h6>
+    <div style="margin-left:33px" class="listing-detail">
+    <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room"><%- properties.bedrooms %></span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room"><%- properties.rooms %></span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Parking"><%- properties.garages %></span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bathrooms"><%- properties.bathrooms %></span> </div>
+
+ </div>
+ <div class="col-lg-12 col-sm-6 ">
+ <div class="enquiry">
+  <h6><span class="glyphicon glyphicon-envelope"></span> Post Enquiry</h6>
+
+  <!-- Instead of including propertyType directly in the URL, you should encode it using encodeURIComponent() to ensure that it is safe for use in a URL.  -->
+      <form role="form"  id="enquiryForm" action="/contactUsEnquire/<%= properties._id %>/<%= encodeURIComponent(properties.heading) %>/<%= encodeURIComponent(properties.propertyType) %>/<%= encodeURIComponent(properties.address) %>/<%= encodeURIComponent(properties.countryCity) %>" method="post">
+                <input type="text" class="form-control" name="flname" placeholder="Full Name"/>
+                <input type="email" class="form-control" name="email" placeholder="you@yourdomain.com"/>
+                <input type="text" class="form-control" name="contactNumber" placeholder="your number"/>
+                <textarea rows="6" class="form-control" name="message" placeholder="Whats on your mind?"></textarea>
+      <button type="submit" class="btn btn-primary" name="Submit">Send Message</button>
+      </form>
+      <div id="thankYouMessage" style="display: none;">
+        Thank you, your message has been sent. An agent will get back to you shortly.
+      </div>
+      <script src="../assets/js/loopple/notification.js"></script>
+     
+
+
+ </div>         
+</div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<%- include(`partials/footer`); -%>
+
+
+

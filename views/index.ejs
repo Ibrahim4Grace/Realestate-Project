@@ -1,0 +1,218 @@
+<%- include(`partials/header`); -%>
+
+<div class="">
+    
+
+            <div id="slider" class="sl-slider-wrapper">
+
+        <div class="sl-slider">
+        
+          <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
+            <div class="sl-slide-inner">
+              <div class="bg-img bg-img-1"></div>
+              <h2><a href="/buysalerent">2 Bed Rooms and 1 Dinning Room Aparment on Sale</a></h2>
+              <blockquote>              
+              <p class="location"><span class="glyphicon glyphicon-map-marker"></span> 24b Victoria Island Ikoyi</p>
+              <p>Until he extends the circle of his compassion to all living things, man will not himself find peace.</p>
+              <cite>#20,000,000</cite>
+              </blockquote>
+            </div>
+          </div>
+          
+          <div class="sl-slide" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15" data-slice1-scale="1.5" data-slice2-scale="1.5">
+            <div class="sl-slide-inner">
+              <div class="bg-img bg-img-2"></div>
+              <h2><a href="/buysalerent">2 Bed Rooms and 1 Dinning Room Aparment on Sale</a></h2>
+              <blockquote>              
+              <p class="location"><span class="glyphicon glyphicon-map-marker"></span> 4B San Lane peninsula</p>
+              <p>Until he extends the circle of his compassion to all living things, man will not himself find peace.</p>
+              <cite># 30,000,000</cite>
+              </blockquote>
+            </div>
+          </div>
+          
+          <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="3" data-slice2-rotation="3" data-slice1-scale="2" data-slice2-scale="1">
+            <div class="sl-slide-inner">
+              <div class="bg-img bg-img-3"></div>
+              <h2><a href="/buysalerent">2 Bed Rooms and 1 Dinning Room Aparment on Sale</a></h2>
+              <blockquote>              
+              <p class="location"><span class="glyphicon glyphicon-map-marker"></span> 3B Richards Millie Ikoyi</p>
+              <p>Until he extends the circle of his compassion to all living things, man will not himself find peace.</p>
+              <cite># 40,000,000</cite>
+              </blockquote>
+            </div>
+          </div>
+          
+          <div class="sl-slide" data-orientation="vertical" data-slice1-rotation="-5" data-slice2-rotation="25" data-slice1-scale="2" data-slice2-scale="1">
+            <div class="sl-slide-inner">
+              <div class="bg-img bg-img-4"></div>
+              <h2><a href="/buysalerent">2 Bed Rooms and 1 Dinning Room Aparment on Sale</a></h2>
+              <blockquote>              
+              <p class="location"><span class="glyphicon glyphicon-map-marker"></span>54 Amen Estate Ikoyi</p>
+              <p>Until he extends the circle of his compassion to all living things, man will not himself find peace.</p>
+              <cite># 20,000,000</cite>
+              </blockquote>
+            </div>
+          </div>
+          
+          <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-5" data-slice2-rotation="10" data-slice1-scale="2" data-slice2-scale="1">
+            <div class="sl-slide-inner">
+              <div class="bg-img bg-img-5"></div>
+              <h2><a href="/buysalerent">2 Bed Rooms and 1 Dinning Room Aparment on Sale</a></h2>
+              <blockquote>              
+              <p class="location"><span class="glyphicon glyphicon-map-marker"></span> 23 Makun Esatet Ikoyi</p>
+              <p>Until he extends the circle of his compassion to all living things, man will not himself find peace.</p>
+              <cite># 25,000,000</cite>
+              </blockquote>
+            </div>
+          </div>
+        </div><!-- /sl-slider -->
+
+
+
+        <nav id="nav-dots" class="nav-dots">
+          <span class="nav-dot-current"></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </nav>
+
+      </div><!-- /slider-wrapper -->
+</div>
+
+
+
+<div class="banner-search">
+  <div class="container"> 
+    <!-- banner -->
+    <h3>Buy, Sale & Rent</h3>
+    <div class="searchbar">
+      <form action="/searchProperty" method="post">
+      <div class="row">
+        <div class="col-lg-6 col-sm-6">
+          <input type="text" class="form-control" placeholder="Search of Properties" readonly>
+          <div class="row">
+
+            <div class="col-lg-3 col-sm-3 ">
+              <% let propertyStatus=["Shortlet", "For Rent","For Sale"] %>
+              <select class="form-control" name="propertyStatus" required>
+                <% propertyStatus.forEach((so)=> { %>
+                  <option value="<%- so %>"><%- so %></option>
+              <% }) %>
+              </select>
+            </div>
+
+            <div class="col-lg-3 col-sm-4">
+              <% let amount=["#50,000,000", "#100,000,000", "#200,000,000","#300,000,000","Above"] %>
+              <select class="form-control" name="amount" required>
+                <% amount.forEach((so)=> { %>
+                  <option value="<%- so %>"><%- so %></option>
+              <% }) %>
+              </select>
+            </div>
+
+            <div class="col-lg-3 col-sm-4">
+              <% let propertyType=["Apartment", "Loft", "Office","House","Bungalow","Land"] %>
+               <select  class="form-control" name="propertyType" required>
+                   <% propertyType.forEach((so)=> { %>
+                  <option value="<%- so %>"><%- so %></option>
+              <% }) %>
+              </select>
+            </div>
+
+            <div class="col-lg-3 col-sm-4">
+              <% let countryCity=["Lagos Island", "Ikeja", "Victoria Island", "Ikoyi", "Apapa", "Surulere", "Yaba", "Agege", "Ikorodu", "Badagry", "Epe", "Festac Town", "Lekki", "Ajah", "Maryland", "Oshodi", "Mushin", "Bariga", "Ojodu", "Alimosho", "Egbeda", "Ikotun", "Isheri-Olofin", "Ketu", "Isolo", "Okota", "Ojo", "Alaba"] %>
+              <select class="form-control" name="countryCity" required>
+                <% countryCity.forEach((so)=> { %>
+                  <option value="<%- so %>"><%- so %></option>
+              <% }) %>
+              </select>
+            </div>
+
+
+              <div class="col-lg-3 col-sm-4">
+              <button class="btn btn-success"  onclick="window.location.href='buysalerent.php'">Find Now</button>
+              </div>
+          </div>  
+        </div>  
+      </div>
+
+    </form>
+    </div>
+  </div>
+</div>
+<!-- banner -->
+<div class="container">
+  <div class="properties-listing spacer"> 
+    <a href="/buysalerent" class="pull-right viewall">View All Listing</a>
+  
+      <h2 style="color: #64a30a;">Featured Properties</h2>
+      <div id="owl-example" class="owl-carousel">
+          <% properties.forEach((result) => { %>
+              <div class="properties">
+                  <div class="image-holder">
+                      <img class="img-responsive" src="data:<%= result.images[0].contentType %>;base64,<%= result.images[0].data.toString('base64') %>">
+                      <div class="status new"><%- result.propertyStatus %></div>
+                  </div>
+                  <h4><a href="/property-detail/<%- result._id %>"><%- result.heading %></a></h4>
+                  <p class="price">Price: <%- result.amount %></p>
+                  <div class="listing-detail">
+                      <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room"><%- result.bedrooms %></span>
+                      <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room"><%- result.rooms %></span>
+                      <span data-toggle="tooltip" data-placement="bottom" data-original-title="Parking"><%- result.garages %></span>
+                      <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bathrooms"><%- result.bathrooms %></span>
+                  </div>
+                  <a class="btn btn-primary" href="/property-detail/<%- result._id %>">View Details</a>
+              </div>
+          <% })%>
+      </div>
+
+  
+  </div>
+  <div class="spacer">
+    <div class="row">
+      <div class="col-lg-6 col-sm-9 recent-view">
+        <h3>About Us</h3>
+        <p>At Korex RealEstate, we pride ourselves on being at the forefront of the real estate industry, offering a range of services that cater to the diverse needs of our clients. With a strong commitment to excellence, innovation, and client satisfaction, we have become a trusted name in the real estate market. Korex RealEstate was founded by Agboola Akorede in 2023.<br><a href="/about">Learn More</a></p>
+      
+      </div>
+      <div class="col-lg-5 col-lg-offset-1 col-sm-3 recommended">
+        <h3>Recommended Properties</h3>
+        <div id="myCarousel" class="carousel slide">
+          <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1" class=""></li>
+            <li data-target="#myCarousel" data-slide-to="2" class=""></li>
+            <li data-target="#myCarousel" data-slide-to="3" class=""></li>
+          </ol>
+          <!-- Carousel items -->
+          <div class="carousel-inner">
+
+            
+         
+           
+              <% properties.forEach((result, index) => { %>
+                  <div class="item <%= index === 0 ? 'active' : '' %>">
+                      <div class="row">
+                          <div class="col-lg-4">
+                              <img class="img-responsive" src="data:<%= result.images[0].contentType %>;base64,<%= result.images[0].data.toString('base64') %>">
+                          </div>
+                          <div class="col-lg-8">
+                              <h5><a href="/property-detail/<%- result._id %>"><%- result.heading %></a></h5>
+                              <p class="price"><%- result.amount %></p>
+                              <a href="/property-detail/<%- result._id %>" class="more" >More Detail</a>
+                          </div>
+                      </div>
+                  </div>
+              <% })%>
+          
+          
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include(`partials/footer`); -%>

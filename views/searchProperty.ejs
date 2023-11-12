@@ -1,0 +1,119 @@
+<%- include('partials/header'); %>
+
+<div class="container">
+    <div class="properties-listing spacer">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-3 col-sm-4 hidden-xs">
+                <div class="hot-properties hidden-xs">
+                    <h4>Hot Properties</h4>
+                    <div class="row">
+                                    <div class="col-lg-4 col-sm-5"><img src="../images/properties/4.jpg" class="img-responsive img-circle" alt="properties"/></div>
+                                    <div class="col-lg-8 col-sm-7">
+                                      <h5><a href="/buysalerent">5bedrooms Duplex</a></h5>
+                                      <p class="price">#650,000,000</p> </div>
+                                  </div>
+                    <div class="row">
+                                    <div class="col-lg-4 col-sm-5"><img src="../images/properties/1.jpg" class="img-responsive img-circle" alt="properties"/></div>
+                                    <div class="col-lg-8 col-sm-7">
+                                      <h5><a href="/buysalerent">4bedrooms Duplex</a></h5>
+                                      <p class="price">#550,000,000</p> </div>
+                                  </div>
+                    
+                    <div class="row">
+                                    <div class="col-lg-4 col-sm-5"><img src="../images/properties/3.jpg" class="img-responsive img-circle" alt="properties"/></div>
+                                    <div class="col-lg-8 col-sm-7">
+                                      <h5><a href="/buysalerent">Mansion</a></h5>
+                                      <p class="price">#900,000,000</p> </div>
+                                  </div>
+                    
+                    <div class="row">
+                                    <div class="col-lg-4 col-sm-5"><img src="../images/properties/2.jpg" class="img-responsive img-circle" alt="properties"/></div>
+                                    <div class="col-lg-8 col-sm-7">
+                                      <h5><a href="/buysalerent">5bedrooms Duplex</a></h5>
+                                      <p class="price">#700,000,000</p> </div>
+                                  </div>
+                </div>
+                <div class="advertisement">
+                    <!-- Advertisements content -->
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-99 col-sm-8">
+                <!-- Property Details -->
+                
+                <% if (properties.length > 0) { %>
+                    <% properties.forEach((property, index) => { %>
+                        <div class="property-container">
+                         
+                                    
+
+                            <!-- Agent Details -->
+                            <div class="col-lg-122 col-sm-6">
+                               <!-- Property Images Carousel -->
+                            <div class="property-images">
+                              <div id="myCarousel<%- index %>" class="carousel slide" data-ride="carousel">
+                                  <!-- Indicators -->
+                                  <ol class="carousel-indicators hidden-xs">
+                                      <% for (let i = 0; i < property.images.length; i++) { %>
+                                          <li data-target="#myCarousel<%- index %>" data-slide-to="<%- i %>" class="<%- i === 0 ? 'active' : '' %>"></li>
+                                      <% } %>
+                                  </ol>
+                                  <div class="carousel-inner">
+                                      <% property.images.forEach((image, i) => { %>
+                                          <div class="item <%- i === 0 ? 'active' : '' %>">
+                                              <!-- Property Image with border-bottom -->
+                                              <br><img class="property-image" src="data:<%= image.contentType %>;base64,<%= image.data.toString('base64') %>" alt="properties">
+                                          </div>
+                                      <% }) %>
+                                  </div>
+                              
+                              </div>
+                          </div>
+                                <div class="property-info">
+                                    
+                                    <h2><a href="/property-detail/<%- property._id %>"><%- property.heading %></a></h2>
+                           
+                                    <p class="price"><%- property.amount %></p>
+                                    <h4><span class="glyphicon glyphicon-th-list"></span> Property Detail</h4>
+                                    <p><%- property.description %></p>
+                                    <p class="area">
+                                        <span class="glyphicon glyphicon-map-marker"></span>
+                                        <%- property.address %><%- property.countryCity %> <%- property.countryState %> <%- property.country %>
+                                    </p>
+                                    <div class="profile">
+                                        <span class="glyphicon glyphicon-user"></span> Agent Details
+                                        <p><%- property.contactPerson %><br><%- property.agentNumber %></p>
+                                    </div>
+
+                                      <!-- Availability -->
+                                <h6><span class="glyphicon glyphicon-home"></span> Availability</h6>
+                                <div class="listing-detail">
+                                    <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room"><%- property.bedrooms %></span>
+                                    <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room"><%- property.rooms %></span>
+                                    <span data-toggle="tooltip" data-placement="bottom" data-original-title="Parking"><%- property.garages %></span>
+                                    <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bathrooms"><%- property.bathrooms %></span>
+                                </div>
+                                <a class="btn btn-primary" href="/property-detail/<%- property._id %>">View Details</a>
+                                </div>
+                              
+                              
+                            </div>
+                        </div>
+
+                        <!-- Add space between properties -->
+                        <div class="property-spacing"></div>
+                    <% }) %>
+                <% } else { %>
+                    <h2 style="color:#64a30a;">No <%- propertyType %> found in <%- countryCity %> for your search</h2>
+                <% } %>
+
+              
+            </div>
+            <!-- End Main Content -->
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer'); %>

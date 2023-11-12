@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://bootswatch.com/4/journal/bootstrap.min.css">
+  <script>document.getElementsByTagName("html")[0].className += " js";</script>
+  <link rel="icon" href="images/logos.jpg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/stylesheet.css">
+  <title>Admin</title>
+
+</head>
+<body>
+  <%- include(`partials/header2`); -%>
+  
+  <main class="cd-main-content">
+    <%- include(`partials/sidebar`); -%>
+  
+    <div class="cd-content-wrapper">
+      <div class="text-component text-center">
+
+        <div class="headers">
+
+          <h3 class="text-box1">Welcome to Admin Page </h3>
+          <div class="bottom-left">We are glad to see you again!</div>
+
+        </div>
+
+        <%- include (`./partials/messages`); -%>
+
+        <div class="flex-agent-banner">
+
+            <div class="header-box">
+                <h3 class="text-box">Add New Admin </h3>
+            </div>
+            
+
+            <form action="/admin" method="post">
+
+                <div class="agent-box1">
+                    <label for="">Admin Name:</label>
+                        <input class="agent-input" type="text" name="fullName" placeholder="Admin Name"
+                            value="<%= typeof fullName != 'undefined' ? fullName : '' %>"><br>
+
+                    <label for="">Admin Username:</label>
+                    <input class="agent-input" type="text" name="username" placeholder="Admin Username"
+                    value="<%= typeof username != 'undefined' ? username : '' %>"><br>
+
+                </div>
+
+                <div class="agent-box2">
+                    <label for="">Admin Password:</label>
+                        <input class="agent-input" type="password" name="password" placeholder="Admin Password"
+                        value="<%= typeof password != 'undefined' ? password : '' %>"><br>
+
+                    <label for="">Confirm Password:</label>
+                        <input class="agent-input" type="password" name="password2" placeholder="Confirm Password"
+                        value="<%= typeof password2 != 'undefined' ? password2 : '' %>"><br>
+
+                </div>
+
+                <div class="agent-box3">
+                        <label for="">Admin Address:</label>
+                        <input class="agent-input" type="text" name="adminAddress" placeholder="Home Address"
+                        value="<%= typeof adminAddress != 'undefined' ? adminAddress : '' %>">
+
+                        <br><label for="">Admin Number:</label>
+                          <input class="agent-input" type="text" name="adminNumber" placeholder="Phone Number"
+                          value="<%= typeof adminNumber != 'undefined' ? adminNumber : '' %>">
+  
+                   
+                </div>
+
+                <div class="agent-box4">
+                   
+                    <% let role=["Admin", "Editor"] %>
+                          <label for="">Select Admin Role:</label>
+                          <select  class="agent-input" style="height: 45px;margin-top: -0px;" name="role"
+                           value="<%= typeof role != 'undefined' ? role : '' %>">
+  
+                          <% role.forEach((so)=> { %>
+                          <option value="<%- so %>"><%- so %></option>
+  
+                          <% }) %>
+  
+                          </select>
+
+
+                   <button class="admin-btn">Add New Admin</button>
+                </div>
+              
+            
+             
+
+              
+            </form>
+        </div>
+
+            <div class="flex-agent-main">
+                <div class="main-properties">
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Admin Name</th>
+                                <th>Admin Username</th>
+                                <th>Admin Address</th>
+                                <th>Admin Number</th>
+                                <th>Admin Role</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (myAdminInfo.length > 0) { %>
+                                <!-- Render the table here showing images in array -->
+                                <% myAdminInfo.forEach(admin => { %>
+                                    <tr>
+                                        
+                                        <td><%= admin.fullName %></td>
+                                        <td><%= admin.username %></td>
+                                        <td><%= admin.adminAddress %></td>
+                                        <td><%= admin.adminNumber %></td>
+                                        <td><%= admin.role %></td>
+                                        <td data-label="Edit"><a href="/editAdmin/<%= admin._id %>"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+                                        <td data-label="Delete"><a href="/deleteAdmin/<%= admin._id %>"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+                                    </tr>
+                                <% }); %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="12">No Admin information to display.</td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                    <div class="center">
+                        <div class="pagination">
+                            <% for (let i=1; i <=totalPages; i++) { %>
+                                <a href="/admin?page=<%= i %>"
+                                    class="<%= currentPage === i ? 'active' : '' %>">
+                                    <%= i %>
+                                </a>
+                                <% } %>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+       
+        
+      </div>
+    </div> <!-- .content-wrapper -->
+  </main> <!-- .cd-main-content -->
+  <script src="assets/js/loopple/forminput.js"></script>   <!-- addPropertyForm -->
+  <script src="js/util.js"></script> <!-- util functions included in the CodyHouse framework -->
+  <script src="js/menu-aim.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

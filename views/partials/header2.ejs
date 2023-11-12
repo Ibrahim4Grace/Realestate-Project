@@ -1,0 +1,32 @@
+<header class="cd-main-header js-cd-main-header">
+    <div class="cd-logo-wrapper">
+      <a href="/dashboard" class="cd-logo"><img src="../images/logos.jpg" alt="Logo"></a>
+    </div>
+    
+    <div class="cd-searc js-cd-search">
+      <form>
+        <input class="reset" type="search">
+      </form>
+    </div>
+  
+    <button class="reset cd-nav-trigger js-cd-nav-trigger" aria-label="Toggle menu"><span></span></button>
+  
+    <ul class="cd-nav__list js-cd-nav__list">
+    
+      <li class="cd-nav__item cd-nav__item--has-children cd-nav__item--account js-cd-item--has-children">
+        <a href="/dashboard">
+          <img src="../images/icon/k8891r.jpg" alt="avatar">
+          <span>Account</span>
+        </a>
+    
+        <ul class="cd-nav__sub-list">
+          <!-- <li class="cd-nav__sub-item"><a href="#0">My Account</a></li>
+          <li class="cd-nav__sub-item"><a href="#0">Edit Account</a></li> -->
+          <form action="/logout?_method=DELETE" method="post">
+          <li class="cd-nav__sub-item"><button type="submit" class="logout-btn">Logout</button></li>
+          </form>
+        </ul>
+      </li>
+    </ul>
+  </header>
+

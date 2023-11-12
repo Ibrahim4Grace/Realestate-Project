@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://bootswatch.com/4/journal/bootstrap.min.css">
+  <script>document.getElementsByTagName("html")[0].className += " js";</script>
+  <link rel="icon" href="images/logos.jpg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/stylesheet.css">
+  <title>House Enquire</title>
+
+</head>
+<body>
+  <%- include(`partials/header2`); -%>
+  
+  <main class="cd-main-content">
+    <%- include(`partials/sidebar`); -%>
+  
+    <div class="cd-content-wrapper">
+      <div class="text-component text-center">
+
+        <div class="headers">
+
+          <h3 class="text-box1">Property Enquire</h3>
+          <div class="bottom-left">We are glad to see you again!</div>
+
+        </div>
+
+        <%- include (`./partials/messages`); -%>
+
+        <div class="flex-banner-container">
+
+            <div class="main-properties">
+
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Contact Name</th>
+                            <th>Contact Email</th>
+                            <th>Contact Number</th>
+                            <th>Property</th>
+                            <th>Property Strcuture</th>
+                            <th>Property Address</th>
+                            <th>Property City</th>
+                            <th>Message</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if (contactEnquire.length > 0) { %>
+                            <!-- Render the table here showing images in array -->
+                            <% contactEnquire.forEach(contactEnquire => { %>
+                                <tr>
+                                   
+                                    <td><%= contactEnquire.flname %></td>
+                                    <td><%= contactEnquire.email %></td>
+                                    <td><%= contactEnquire.contactNumber %></td>
+                                    <td><%= contactEnquire.heading %></td>
+                                    <td><%= contactEnquire.propertyType %></td>
+                                    <td><%= contactEnquire.address %></td>
+                                    <td><%= contactEnquire.countryCity %></td>
+                                    <td><%= contactEnquire.message %></td>
+                                    <td data-label="Delete"><a href="/deletecontactEnquire/<%= contactEnquire._id %>">
+                                        <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                    </td>
+
+                                </tr>
+                            <% }); %>
+                        <% } else { %>
+                            <tr>
+                                <td colspan="12">No property to display.</td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+                <div class="center">
+                <div class="pagination">
+                    <% for (let i=1; i <=totalPages; i++) { %>
+                        <a href="/houseEnquireforum?page=<%= i %>"
+                            class="<%= currentPage === i ? 'active' : '' %>">
+                            <%= i %>
+                        </a>
+                        <% } %>
+                </div>
+            </div>
+
+            </div>            
+        </div>
+        
+      </div>
+    </div> <!-- .content-wrapper -->
+  </main> <!-- .cd-main-content -->
+  <script src="assets/js/loopple/forminput.js"></script>   <!-- addPropertyForm -->
+  <script src="js/util.js"></script> <!-- util functions included in the CodyHouse framework -->
+  <script src="js/menu-aim.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

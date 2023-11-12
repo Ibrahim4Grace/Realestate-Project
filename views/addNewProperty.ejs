@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://bootswatch.com/4/journal/bootstrap.min.css">
+  <script>document.getElementsByTagName("html")[0].className += " js";</script>
+  <link rel="icon" href="images/logos.jpg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/stylesheet.css">
+  <title>Add Property</title>
+ 
+</head>
+<body>
+  <%- include(`partials/header2`); -%>
+  
+  <main class="cd-main-content">
+    <%- include(`partials/sidebar`); -%>
+  
+    <div class="cd-content-wrapper">
+      <div class="text-component text-center">
+
+        <div class="headers">
+
+          <h3 class="text-box1">Add New Property </h3>
+          <div class="bottom-left">We are glad to see you again!</div>
+
+        </div>
+
+        <%- include (`./partials/messages`); -%>
+
+        <div class="flex-banner-container">
+
+
+              <div class="main">
+
+                <form id="regForm" action="/addNewProperty" method="post"  enctype="multipart/form-data">
+
+                  <h1 class="topic">Property Description:</h1>
+
+                   <!-- Circles which indicates the steps of the form: -->
+                   <div class="box">
+                    <span class="step">1. Description</span>
+                    <span class="step">2. Media</span>
+                    <span class="step">3. Location</span>
+                    <span class="step">4. Details</span>
+                    <span class="step">5. Submit</span>
+                  </div>
+
+                  
+                  <!-- One "tab" for each step in the form: -->
+                  <div class="tab">
+                    
+                    <p><input placeholder="Contact person name..." oninput="this.className = ''" name="contactPerson"
+                         value="<%= typeof contactPerson != 'undefined' ? contactPerson : '' %>">
+                    </p>
+
+                    <p><textarea placeholder="Enter house Description..." maxlength="250" oninput="this.className = ''" name="description" 
+                      value="<%= typeof description != 'undefined' ? description : '' %>" ></textarea>
+                    </p>
+
+                    <div class="information">
+
+                      <div class="box1">
+                        <% let propertyType=["Apartment", "Loft", "Office","House","Bungalow","Land"] %>
+
+                        <label class="labelinput">Select Property Type</label>
+                        <select  name="propertyType"
+                            value="<%= typeof propertyType != 'undefined' ? propertyType : '' %>">
+
+                            <% propertyType.forEach((so)=> { %>
+                                <option value="<%- so %>"><%- so %></option>
+
+                                <% }) %>
+
+                        </select><br>
+                       
+                        <br><label class="labelinput"> Amount</label>
+                        <p><input class="info" placeholder="Enter Amount..." oninput="this.className = ''" name="amount"
+                          value="<%= typeof amount != 'undefined' ? amount : '' %>">
+                        </p>
+                      </div>
+
+                        <div class="box2">
+                          <% let houseCondition=["New", "Renovated", "Old" ] %>
+
+                          <label class="labelinput">House Condition</label>
+                          <select name="houseCondition"
+                              value="<%= typeof houseCondition != 'undefined' ? houseCondition : '' %>">
+
+                             
+
+                              <% houseCondition.forEach((so)=> { %>
+                                  <option value="<%- so %>"><%- so %></option>
+
+                                  <% }) %>
+
+                          </select><br>
+                       
+                          <br><label class="labelinput"> Yearly Tax Rate</label>
+                          <p><input class="info" placeholder="Tax..." oninput="this.className = ''" name="tax"
+                            value="<%= typeof tax != 'undefined' ? tax : '' %>">
+                          </p>
+                        </div>
+
+                        <div class="box3">
+                          <% let propertyStatus=["Shortlet", "For Rent","For Sale", "Sold" ] %>
+
+                          <label class="labelinput">Property Status</label>
+                          <select  name="propertyStatus"
+                              value="<%= typeof propertyStatus != 'undefined' ? propertyStatus : '' %>">
+
+                            
+                              <% propertyStatus.forEach((so)=> { %>
+                                  <option value="<%- so %>"><%- so %></option>
+
+                                  <% }) %>
+
+                          </select><br>
+                       
+                          <br><label class="labelinput">Agent Number</label>
+                          <p><input class="info" placeholder="Agent Number..." oninput="this.className = ''" name="agentNumber"
+                            value="<%= typeof agentNumber != 'undefined' ? agentNumber : '' %>">
+                          </p>
+                        </div>
+
+                    </div>
+                  </div>
+                  <div class="tab">
+                   
+                    <p>Upload 3 Images: <input type="file" oninput="this.className = ''" name="images" multiple></p>
+
+                  
+                    
+                  </div>
+
+                  <div class="tab">
+                    <p><input placeholder="Enter house address" oninput="this.className = ''" name="address"
+                      value="<%= typeof address != 'undefined' ? address : '' %>">
+                    </p>
+                    
+                    <div class="information">
+
+                      <div class="box1">
+                        <% let countryState=["Lagos", "Ogun State"] %>
+
+                        <label class="labelinput">Country / State</label>
+                        <select  name="countryState"
+                            value="<%= typeof countryState != 'undefined' ? countryState : '' %>">
+
+                            <% countryState.forEach((so)=> { %>
+                                <option value="<%- so %>"><%- so %></option>
+
+                                <% }) %>
+
+                        </select><br>
+                      </div>
+
+                        <div class="box2">
+                          <% let countryCity=["Lagos Island", "Ikeja", "Victoria Island", "Ikoyi", "Apapa", "Surulere", "Yaba", "Agege", "Ikorodu", "Badagry", "Epe", "Festac Town", "Lekki", "Ajah", "Maryland", "Oshodi", "Mushin", "Bariga", "Ojodu", "Alimosho", "Egbeda", "Ikotun", "Isheri-Olofin", "Ketu", "Isolo", "Okota", "Ojo", "Alaba"] %>
+
+                          <label class="labelinput">Select City</label>
+                          <select name="countryCity"
+                              value="<%= typeof countryCity != 'undefined' ? countryCity : '' %>">
+
+                              <% countryCity.forEach((so)=> { %>
+                                  <option value="<%- so %>"><%- so %></option>
+
+                                  <% }) %>
+
+                          </select><br>
+                       
+                         
+                        </div>
+
+                        <div class="box3">
+                          <% let country=["Nigeria"] %>
+
+                          <label class="labelinput">Country</label>
+                          <select  name="country"
+                              value="Nigeria">
+
+                            
+                              <% country.forEach((so)=> { %>
+                                  <option value="<%- so %>"><%- so %></option>
+
+                                  <% }) %>
+
+                          </select><br>
+                       
+                          
+                        </div>
+
+                    </div>
+                  </div>
+
+                  <div class="tab">
+                    <div class="informations">
+
+                      <div class="boxx1">
+                        <label class="labelinputs">Size in ft (only numbers)</label>
+                          <p><input class="inputitems" type="number" placeholder="Size in ft" oninput="this.className = ''" name="sizeinFt"
+                            value="<%= typeof sizeinFt != 'undefined' ? sizeinFt : '' %>">
+                          </p>
+
+                          <label class="labelinputs">Property Heading</label>
+                          <p><input class="inputitems" type="text" placeholder="Property Header" oninput="this.className = ''" name="heading"
+                            value="<%= typeof heading != 'undefined' ? heading : '' %>">
+                          </p>
+
+                          <label class="labelinputs">Rooms</label>
+                          <p><input class="inputitems" placeholder="Enter Rooms " oninput="this.className = ''" name="rooms"
+                            value="<%= typeof rooms != 'undefined' ? rooms : '' %>">
+                          </p>
+
+                        
+                      </div>
+
+                        <div class="boxx2">
+
+                          <label class="labelinputs">Bedrooms</label>
+                          <p><input class="inputitems" type="text" placeholder="Enter Bedrooms" oninput="this.className = ''" 
+                            name="bedrooms" value="<%= typeof bedrooms != 'undefined' ? bedrooms : '' %>">
+                          </p>
+                          
+                          <label class="labelinputs">Bathrooms</label>
+                          <p><input class="inputitems" type="text" placeholder="Enter Bathrooms" oninput="this.className = ''"
+                             name="bathrooms" value="<%= typeof bathrooms != 'undefined' ? bathrooms : '' %>">
+                          </p>
+
+                          <label class="labelinputs">Garages</label>
+                          <p><input class="inputitems" placeholder="Enter Garages " oninput="this.className = ''" 
+                             name="garages" value="<%= typeof garages != 'undefined' ? garages : '' %>">
+                          </p>
+                       
+                                               
+                        </div>
+
+                        <div class="boxx3">
+
+                          <label class="labelinputs">Garage size</label>
+                          <p><input class="inputitems" type="text" placeholder="Enter Garage size" oninput="this.className = ''" 
+                            name="garageSize" value="<%= typeof garageSize != 'undefined' ? garageSize : '' %>">
+                          </p>
+
+                          <label class="labelinputs">Year built (numeric)</label>
+                          <p><input class="inputitems" type="number" placeholder="Enter Year built" oninput="this.className = ''"
+                             name="yearBuilt" value="<%= typeof yearBuilt != 'undefined' ? yearBuilt : '' %>">
+                          </p>
+                          
+                          <label class="labelinputs">Available from (date)</label>
+                          <p><input class="inputitems" type="date" oninput="this.className = ''" name="availableFrom"
+                            value="<%= typeof availableFrom != 'undefined' ? availableFrom : '' %>">
+                          </p>
+                                                                       
+                        </div>
+
+                        <div class="boxx4">
+                          
+                          <label class="labelinputs">Basement</label>
+                          <p><input class="inputitems" type="text" placeholder="Enter Basement" oninput="this.className = ''" 
+                            name="basement" value="<%= typeof basement != 'undefined' ? basement : '' %>">
+                          </p>
+
+                          <label class="labelinputs">Roofing</label>
+                          <p><input class="inputitems" type="text" placeholder="Enter Roofing" oninput="this.className = ''" 
+                            name="roofing" value="<%= typeof roofing != 'undefined' ? roofing : '' %>">
+                          </p>
+
+                          <label class="labelinputs">Exterior Material</label>
+                          <p><input class="inputitems" type="text" placeholder="Enter Exterior Material" oninput="this.className = ''" 
+                            name="exteriorMaterial" value="<%= typeof exteriorMaterial != 'undefined' ? exteriorMaterial : '' %>">
+                          </p>
+                       
+                          
+                        </div>
+
+                    </div>
+                  </div>
+
+                  <div class="tab">
+                  
+
+                  </div>
+
+                  <div style="overflow:auto;">
+                    <div style="float:right;">
+                      <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                      <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                      <button type="submit" id="finalSubmitBtn" style="display:none;">Submit</button>
+
+
+                    </div>
+                  </div>
+                 
+                </form>
+
+
+              </div>
+                      
+        </div>
+        
+      </div>
+    </div> <!-- .content-wrapper -->
+  </main> <!-- .cd-main-content -->
+  <script src="assets/js/loopple/forminput.js"></script>   <!-- addPropertyForm -->
+  <script src="js/util.js"></script> <!-- util functions included in the CodyHouse framework -->
+  <script src="js/menu-aim.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

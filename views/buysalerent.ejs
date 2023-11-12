@@ -1,0 +1,185 @@
+<%- include(`partials/header`); -%>
+
+
+
+<div class="container">
+<div class="properties-listing spacer">
+
+<div class="row">
+<div class="col-lg-3 col-sm-4 ">
+
+  <div class="search-form"><h4><span class="glyphicon glyphicon-search"></span> Search</h4>
+    <form action="/searchProperty" method="post">
+    <input type="text" class="form-control" placeholder="Search for Properties" readonly>
+    <div class="row">
+            <div class="col-lg-5">
+              <% let propertyStatus=["Shortlet", "For Rent","For Sale"] %>
+              <select class="form-control" name="propertyStatus" required>
+                <% propertyStatus.forEach((so)=> { %>
+                  <option value="<%- so %>"><%- so %></option>
+              <% }) %>
+              </select>
+            </div>
+            <div class="col-lg-7">
+              <% let amount=["#50,000,000", "#100,000,000", "#200,000,000","#300,000,000","Above"] %>
+              <select class="form-control" name="amount" required>
+                <% amount.forEach((so)=> { %>
+                  <option value="<%- so %>"><%- so %></option>
+              <% }) %>
+              </select>
+            </div>
+    </div>
+
+        <div class="row">
+          <div class="col-lg-5">
+            <% let propertyType=["Apartment", "Loft", "Office","House","Bungalow","Land"] %>
+            <select  class="form-control" name="propertyType" required>
+                <% propertyType.forEach((so)=> { %>
+               <option value="<%- so %>"><%- so %></option>
+           <% }) %>
+           </select>
+          </div>
+          <div class="col-lg-7">
+            <% let countryCity=["Lagos Island", "Ikeja", "Victoria Island", "Ikoyi", "Apapa", "Surulere", "Yaba", "Agege", "Ikorodu", "Badagry", "Epe", "Festac Town", "Lekki", "Ajah", "Maryland", "Oshodi", "Mushin", "Bariga", "Ojodu", "Alimosho", "Egbeda", "Ikotun", "Isheri-Olofin", "Ketu", "Isolo", "Okota", "Ojo", "Alaba"] %>
+            <select class="form-control" name="countryCity" required>
+              <% countryCity.forEach((so)=> { %>
+                <option value="<%- so %>"><%- so %></option>
+            <% }) %>
+            </select>
+          </div>
+        </div>
+          <button class="btn btn-primary">Find Now</button>
+        </form>
+  </div>
+
+
+
+<div class="hot-properties hidden-xs">
+<h4>Hot Properties</h4>
+<div class="row">
+                <div class="col-lg-4 col-sm-5"><img src="images/properties/1.jpg" class="img-responsive img-circle" alt="properties"></div>
+                <div class="col-lg-8 col-sm-7">
+                  <h5><a href="/buysalerent">2Bedrooms Detached</a></h5>
+                  <p class="price">#210,000,000</p> </div>
+              </div>
+<div class="row">
+                <div class="col-lg-4 col-sm-5"><img src="images/properties/1.jpg" class="img-responsive img-circle" alt="properties"></div>
+                <div class="col-lg-8 col-sm-7">
+                  <h5><a href="/buysalerent">4Bedrooms Detached</a></h5>
+                  <p class="price">#410,000,000</p> </div>
+              </div>
+
+<div class="row">
+                <div class="col-lg-4 col-sm-5"><img src="images/properties/1.jpg" class="img-responsive img-circle" alt="properties"></div>
+                <div class="col-lg-8 col-sm-7">
+                  <h5><a href="/buysalerent">5Bedrooms Detached</a></h5>
+                  <p class="price">#400,000,000</p> </div>
+              </div>
+
+<div class="row">
+                <div class="col-lg-4 col-sm-5"><img src="images/properties/1.jpg" class="img-responsive img-circle" alt="properties"></div>
+                <div class="col-lg-8 col-sm-7">
+                  <h5><a href="/buysalerent">4Bedrooms Detached</a></h5>
+                  <p class="price">#300,000,000</p> </div>
+              </div>
+
+</div>
+
+
+</div>
+
+<div class="col-lg-9 col-sm-8">
+<div class="sortby clearfix">
+<div class="pull-left result">Showing: 12 of 100 </div>
+  <div class="pull-right">
+  <select class="form-control">
+  <option>Sort by</option>
+  <option>Price: Low to High</option>
+  <option>Price: High to Low</option>
+</select></div>
+
+</div>
+<div class="row">
+
+     <!-- properties -->
+     <div class="col-lg-4 col-sm-6">
+      <% for (let i = 0; i < properties.length; i += 2) { %>
+        <div class="row">
+          <% if (properties[i]) { %>
+            <div class="col-md-6">
+              <div class="properties">
+                <div class="image-holder">
+                  <% if (properties[i].images && properties[i].images.length > 0) { %>
+                    <img class="img-responsiveness" src="data:<%= properties[i].images[0].contentType %>;base64,<%= properties[i].images[0].data.toString('base64') %>">
+                  <% } %>
+                  <div class="status sold"><%- properties[i].propertyStatus %></div>
+                </div>
+                <div class="text-container" style="max-width: 100%;">
+                  <h4><a href="/property-detail/<%- properties[i]._id %>"><%- properties[i].heading %></a></h4>
+                  
+                  <p class="price">Price: <%- properties[i].amount %></p>
+                  <div class="listing-detail">
+                    <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room"><%- properties[i].bedrooms %></span>
+                    <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room"><%- properties[i].rooms %></span>
+                    <span data-toggle="tooltip" data-placement="bottom" data-original-title="Parking"><%- properties[i].garages %></span>
+                    <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bathrooms"><%- properties[i].bathrooms %></span>
+                  </div>
+                  <a class="btn btn-primary" href="/property-detail/<%- properties[i]._id %>">View Details</a>
+                </div>
+              </div>
+            </div>
+          <% } %>
+          <% if (properties[i + 1]) { %>
+            <div class="col-md-6">
+              <div class="properties">
+                <div class="image-holder">
+                  <% if (properties[i + 1].images && properties[i + 1].images.length > 0) { %>
+                    <img class="img-responsiveness" src="data:<%= properties[i + 1].images[0].contentType %>;base64,<%= properties[i + 1].images[0].data.toString('base64') %>">
+                  <% } %>
+                  <div class="status sold"><%- properties[i + 1].propertyStatus %></div>
+                </div>
+                <div class="text-container" style="max-width: 100%;">
+                  <h4><a href="/property-detail/<%- properties[i + 1]._id %>"><%- properties[i + 1].heading %></a></h4>
+                  
+                  <p class="price">Price: <%- properties[i + 1].amount %></p>
+                  <div class="listing-detail">
+                    <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room"><%- properties[i + 1].bedrooms %></span>
+                    <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room"><%- properties[i + 1].rooms %></span>
+                    <span data-toggle="tooltip" data-placement="bottom" data-original-title="Parking"><%- properties[i + 1].garages %></span>
+                    <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bathrooms"><%- properties[i + 1].bathrooms %></span>
+                  </div>
+                  <a class="btn btn-primary" href="/property-detail/<%- properties[i + 1]._id %>">View Details</a>
+                </div>
+              </div>
+            </div>
+          <% } %>
+        </div>
+      <% } %>
+    </div>
+    
+    
+  
+      
+      <div class="center">
+        <div class="pagination">
+          <% if (totalPages > 1) { %>
+            <li>
+                <% for (let i = 1; i <= totalPages; i++) { %>
+                    <li <% if (i === currentPage) { %>class="active"<% } %>>
+                        <a href="/buysalerent?page=<%= i %>"><%= i %></a>
+                    </li>
+                  <% } %>
+            </li>
+        <% } %>
+        </div>
+      </div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<%- include(`partials/footer`); -%>
+
+

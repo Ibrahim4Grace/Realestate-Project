@@ -1,0 +1,53 @@
+<%- include(`partials/header`); -%>
+
+<div class="container">
+  <div class="spacer agents">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-sm-12">
+        <!-- agents -->
+        <% ourAgent.forEach((ourAgent) => { %>
+          <!-- Agent Block -->
+          <div class="row">
+            <div class="col-lg-2 col-sm-2">
+              <a href="#">
+                <img src="data:<%= ourAgent.image.contentType %>;base64,<%= ourAgent.image.data.toString('base64') %>" class="about-responsive" style="width: 100px; height: 100px;" alt="agent name">
+              </a>
+            </div>
+            <div class="col-lg-7 col-sm-7">
+              <h4><%- ourAgent.agentName %></h4>
+              <p><%- ourAgent.agentDetails %></p>
+            </div>
+            <div class="col-lg-3 col-sm-3">
+              <span class="glyphicon glyphicon-envelope"></span>
+              <a href="mailto:<%- ourAgent.agentEmail %>"><%- ourAgent.agentEmail %></a>
+              <br>
+              <span class="glyphicon glyphicon-earphone"></span>
+              <%- ourAgent.agentNumber %>
+              
+            </div>
+          </div>
+          <!-- End of Agent Block -->
+          <hr> <!-- Add a horizontal line between agents -->
+        <% }) %>
+        <!-- End of Agents -->
+
+        <!-- Pagination -->
+        <div class="center">
+          <div class="pagination">
+            <% if (totalPages > 1) { %>
+              <li>
+                <% for (let i = 1; i <= totalPages; i++) { %>
+                  <li <% if (i === currentPage) { %>class="active"<% } %>>
+                    <a href="/agent?page=<%= i %>"><%= i %></a>
+                  </li>
+                <% } %>
+              </li>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include(`partials/footer`); -%>
