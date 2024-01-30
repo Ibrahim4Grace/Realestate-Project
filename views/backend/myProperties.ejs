@@ -74,7 +74,7 @@
 
                         <div class="houseSearch">
                             <form action="/backend/searchProperty" method="post">
-                                <input class="houseSearch" type="text" name="heading" placeholder="Search heading tag...">
+                                <input class="houseSearch" type="text" name="city" placeholder="Search property city...">
                             </form>
                         </div>
                       
@@ -84,13 +84,12 @@
                             <tr>
                                 <th>Property image</th>
                                 <th>Property type</th>
-                                <th>Property Price</th>
-                                <th>Property Condition</th>
+                                <th> Price</th>
+                                <th> Condition</th>
                                 <th>Status</th>
                                 <th>Agent Number</th>
-                                <th>Property address</th>
-                                <th>Property city</th>
-                                <th>Property State</th>
+                                <th> address</th>
+                                <th> city</th>
                                 <th>Property Profile</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
@@ -115,19 +114,18 @@
                                     <td><%= property.agentNumber %></td>
                                     <td><%= property.address %></td>
                                     <td><%= property.city %></td>
-                                    <td><%= property.state %></td>
                                     <td data-label="View">
-                                        <a href="/backend/viewAdminProfile/<%- adminResult._id %>">
+                                        <a href="/backend/moreAboutProperty/<%- property._id %>">
                                         view
                                         </a>
                                     </td>
                                     <td data-label="Edit">
-                                        <a href="/editProperty/<%= property._id %>">
+                                        <a href="/backend/editProperty/<%= property._id %>">
                                             <i class="typcn typcn-pencil menu-icon" style="color: black;"></i>
                                         </a>
                                     </td>
                                     <td data-label="Delete">
-                                        <a href="/deleteProperty/<%= property._id %>">
+                                        <a href="/backend/deleteProperty/<%= property._id %>">
                                             <i class="typcn typcn-trash menu-icon" style="color: black;"></i>
                                         </a>
                                     </td>
@@ -142,7 +140,7 @@
                         </table>
                         <div class="pagination">
                           <% for (let i=1; i <=totalPages; i++) { %>
-                            <a href="/myProperties?page=<%= i %>"
+                            <a href="/backend/myProperties?page=<%= i %>"
                                   class="<%= currentPage === i ? 'active' : '' %>">
                                   <%= i %>
                             </a>

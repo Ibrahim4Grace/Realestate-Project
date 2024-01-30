@@ -3,7 +3,7 @@ const router = express.Router();
 const {checkAuthenticated, checkNotAuthenticated} = require ('../middleware/authentication');
 
 const { 
-     adminloginPage,adminloginPagePost,adminDashboard,adminPage,uploads,adminPagePost,allAdmin,viewAdminProfile,editAdminProfile,editAdminProfilePost,deleteAdminProfile,myAgentsPage,upl,myAgentsPagePost,allAgentsPage,moreAboutAgent,editAgentPage,editAgentPagePost, deleteAgent,addNewProperty,upload,addNewPropertyPost, myProperties
+     adminloginPage,adminloginPagePost,adminDashboard,adminPage,uploads,adminPagePost,allAdmin,viewAdminProfile,editAdminProfile,editAdminProfilePost,deleteAdminProfile,myAgentsPage,upl,myAgentsPagePost,allAgentsPage,moreAboutAgent,editAgentPage,editAgentPagePost, deleteAgent,addNewProperty,upload,addNewPropertyPost, myProperties,searchProperties       ,deleteProperty
 
 
 } = require('../controller/backendController');
@@ -26,9 +26,12 @@ router.get('/editAgent/:m_id', checkAuthenticated, editAgentPage);
 router.post('/editAgentPagePost/:mu_id', checkAuthenticated, upl.single('image'), editAgentPagePost);
 router.get('/deleteAgent/:m_id', checkAuthenticated, deleteAgent);
 router.get('/addNewProperty',checkAuthenticated, addNewProperty);
-router.post('/addNewPropertyPost', checkAuthenticated, upload.array('image'), addNewPropertyPost);
+router.post('/addNewPropertyPost', checkAuthenticated, upload.array('images'), addNewPropertyPost);
 router.get('/myProperties',checkAuthenticated, myProperties);
+router.post('/searchProperties', checkAuthenticated, searchProperties);
 
+
+router.get('/deleteProperty/:m_id', checkAuthenticated, deleteProperty);
 // router.get('/admin', checkAuthenticated, adminSection);
 // router.post('/addNewAdminPost', checkAuthenticated, uploads.single('image'), addNewAdminPost);
 // router.get('/editAdmin/:m_id', checkAuthenticated, editAdmininformation);

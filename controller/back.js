@@ -35,58 +35,6 @@ const transporter = nodemailer.createTransport({
 
 
 
-router.post(`/addNewProperty`, checkAuthenticated,  upload.array('images', 3),(req, res) => {
-
-    // USING DATA destructuring
-    const { contactPerson, description, propertyType, amount, houseCondition, tax, propertyStatus,agentNumber,address,countryState,countryCity,country,sizeinFt,heading,rooms,bedrooms,bathrooms,garages,garageSize,yearBuilt,availableFrom,basement,roofing,exteriorMaterial } = req.body;
-
-
-    //check required fields
-    if (!contactPerson || !description || !propertyType || !amount || !houseCondition || !tax || !propertyStatus || !agentNumber || !address || !countryState || !countryCity || !country || !sizeinFt || !heading || !rooms || !bedrooms || !bathrooms || !garages || !garageSize || !yearBuilt || !availableFrom || !basement || !roofing || !exteriorMaterial ) {
-        req.flash(`error`, `Please fill all fields`);
-        res.redirect(`/addNewProperty`);
-    }  // Check if an image was uploaded
-   
-     else {
-
-     
-
-        //TO SAVE INTO DATABASE INPUT
-        try {
-      
-            newProperties.save();
-           
-            // res.send(`Movie Successfully saved into DB`);
-            req.flash('success_msg', 'Property added successfully');
-            res.redirect('/addNewProperty');
-        } catch (err) {
-            console.log(err);
-            req.flash('error', 'An error occurred while adding the expense');
-            res.redirect('/addNewProperty');
-
-        }
-    }
-
-
-});
-
-router.get(`/myProperties`, checkAuthenticated, async (req, res) => {
-
-
-    const page = parseInt(req.query.page) || 1;
-    const perPage = 5; // Number of items per page
-    const totalPosts = await Properties.countDocuments();
-    const totalPages = Math.ceil(totalPosts / perPage);
-
-    const properties = await Properties.find()
-        .skip((page - 1) * perPage)
-        .limit(perPage);
-
-    res.render('myProperties', { properties, totalPages, currentPage: page });
-
-   
-});
-
 router.get(`/editProperty/:m_id`, checkAuthenticated, (req, res) => {
 
     const prop = Properties.findOne({ _id: req.params.m_id })
@@ -133,40 +81,10 @@ router.post(`/editProperty/:m_id`, checkAuthenticated, (req, res) => {
 
 });
 
-router.post(`/searchProperties`, checkAuthenticated, async (req, res) => {
-    try {
-        const coCity = req.body.countryCity;
-
-        const query = {
-            countryCity: { $regex: new RegExp(coCity, 'i') }
-        };
-
-        const properties = await Properties.find(query);
-
-        res.render('searchProperties', { properties }); 
-    } catch (err) {
-        console.error(err);
-        res.redirect('/');
-    }
-});
 
 
 
-router.get(`/deleteProperty/:m_id`, checkAuthenticated, (req, res) => {
 
-
-    const mid = req.params.m_id;
-    Properties.findByIdAndDelete(mid)
-
-        .then(() => {
-            req.flash(`success_msg`, 'Property deleted successfully');
-            res.redirect(`/myProperties`)
-        })
-        .catch(() => {
-
-            res.send(`error`)
-        })
-});
 
 
 

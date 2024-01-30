@@ -720,6 +720,7 @@ const addNewProperty = async (req, res) => {
 };
 
 
+
 //IF WE WANT OUR IMAGES TO GO INOT DIFFERENT FOLDER
 let st = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -742,6 +743,17 @@ const addNewPropertyPost = async (req, res) => {
       if (!contactPerson || !propertyType || !amount || !houseCondition || !propertyStatus || !agentNumber || !address || !city ||!state ||!country || !heading || !sizeinFt || !availableFrom || !description)  {
         errors.push({ msg: 'Please fill in all fields and upload an image' });
       }
+
+      //if all check complete
+      if (errors.length > 0) {
+        return res.render('backend/addNewProperty', {
+          errors,contactPerson, propertyType,amount,
+          houseCondition, propertyStatus,agentNumber,
+          address, city, state,country,heading, sizeinFt,
+          bedrooms,bathrooms,garages, pool, yearBuilt,
+          availableFrom,description,admin,
+        });
+      }
       
       const MAX_IMAGES_ALLOWED = process.env.MAX_IMAGES_ALLOWED || 5;
 
@@ -750,17 +762,17 @@ const addNewPropertyPost = async (req, res) => {
       errors.push({ msg: `Please upload at least one image or maximum ${MAX_IMAGES_ALLOWED} images.` });
     }
 
-      
+      // Extract an array of images from req.files
+      const images = req.files.map((file) => ({
+        data: fs.readFileSync(path.join(__dirname, '../public/houseImage/' + file.filename)),
+        contentType: 'image/png',
+      }));
 
       const newProperties = new Properties({
-
         contactPerson, propertyType,amount, houseCondition,propertyStatus, agentNumber, 
         address, city,state,country, heading,sizeinFt,bedrooms,bathrooms,garages,pool,
         yearBuilt, availableFrom,description,admin,
-        images: req.files.map((file) => ({
-          data: fs.readFileSync(path.join(__dirname, '../public/houseImage/' + file.filename)),
-          contentType: 'image/png', 
-        }))      
+        images: images   
       })
 
       await newProperties.save();
@@ -794,9 +806,40 @@ const myProperties = async (req, res) => {
   }
 };
 
+const searchProperties = async (req, res) => {
+  try {
+
+    const admin = req.user
+    const coCity = req.body.city;
+    const query = {
+      city: { $regex: new RegExp(coCity, 'i') }
+    };
+    const properties = await Properties.find(query);
+    res.render('backend/searchProperties', { properties, admin }); 
+  } catch (err) {
+    console.error(err);
+    res.redirect('/backend/myProperties');
+  }
+};
+
+const moreAboutProperty = async (req, res) => {
+  
+};
+
+const deleteProperty = (req, res) => {
+  const mid = req.params.m_id;
+  Properties.findByIdAndDelete(mid)
+  .then(() => {
+    req.flash(`success_msg`, 'Property deleted successfully');
+    res.redirect(`/backend/myProperties`)
+  })
+  .catch(() => {
+    res.send(`error`)
+  })
+};
 
 module.exports = ({
-  adminloginPage,adminloginPagePost,adminDashboard,adminPage,uploads,adminPagePost,allAdmin,viewAdminProfile,editAdminProfile,editAdminProfilePost,deleteAdminProfile,myAgentsPage,upl,myAgentsPagePost,allAgentsPage,moreAboutAgent,editAgentPage,editAgentPagePost,deleteAgent,addNewProperty,upload,addNewPropertyPost,myProperties
+  adminloginPage,adminloginPagePost,adminDashboard,adminPage,uploads,adminPagePost,allAdmin,viewAdminProfile,editAdminProfile,editAdminProfilePost,deleteAdminProfile,myAgentsPage,upl,myAgentsPagePost,allAgentsPage,moreAboutAgent,editAgentPage,editAgentPagePost,deleteAgent,addNewProperty,upload,addNewPropertyPost,myProperties,searchProperties,moreAboutProperty,      deleteProperty
 
 
 
