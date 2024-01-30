@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Korex RealEstate</title>
+    <!-- base:css -->
+    <link rel="stylesheet" href="../font/typicons.css">
+    <link rel="stylesheet" href="../css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="../vertical-layout-light/style.css">
+    <!-- endinject -->
+    <link rel="icon" href="../img/logos.jpg">
+  </head>
+  <body>
+    <div class="container-scroller">
+      <!-- partial:partials/_navbar.html -->
+      <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+          <a class="navbar-brand brand-logo" href="/backend/dashboard"><img src="../img/logos.jpg" alt="logo"/></a>
+          <a class="navbar-brand brand-logo-mini" href="/backend/dashboard"><img src="../img/logos.jpg" alt="logo"/></a>
+          <button class="navbar-toggler navbar-toggler align-self-center d-none d-lg-flex" type="button" data-toggle="minimize">
+            <span class="typcn typcn-th-menu"></span>
+          </button>
+        </div>
+
+        <%- include ('../partials/adminNav'); -%>
+      </nav>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_settings-panel.html -->
+        <div class="theme-setting-wrapper">
+          <div id="settings-trigger"><i class="typcn typcn-cog-outline"></i></div>
+          <div id="theme-settings" class="settings-panel">
+            <i class="settings-close typcn typcn-delete-outline"></i>
+            <p class="settings-heading">SIDEBAR SKINS</p>
+            <div class="sidebar-bg-options" id="sidebar-light-theme">
+              <div class="img-ss rounded-circle bg-light border mr-3"></div>
+              Light
+            </div>
+            <div class="sidebar-bg-options selected" id="sidebar-dark-theme">
+              <div class="img-ss rounded-circle bg-dark border mr-3"></div>
+              Dark
+            </div>
+            <p class="settings-heading mt-2">HEADER SKINS</p>
+            <div class="color-tiles mx-0 px-4">
+              <div class="tiles success"></div>
+              <div class="tiles warning"></div>
+              <div class="tiles danger"></div>
+              <div class="tiles primary"></div>
+              <div class="tiles info"></div>
+              <div class="tiles dark"></div>
+              <div class="tiles default border"></div>
+            </div>
+          </div>
+        </div>
+        <!-- partial -->
+        <!-- partial:partials/_sidebar.html -->
+        <%- include('../partials/adminSidebar'); -%>
+
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+
+              
+                <%- include (`../partials/messages`); -%>
+
+                <div class="col-12 grid-margin">
+                  <div class="card">
+                    <div class="card-body">
+                      <h4 class="card-title">Property Description</h4>
+                      <form class="form-sample" action="/backend/addNewPropertyPost" method="post"  enctype="multipart/form-data">
+                        <p class="card-description">
+                          Personal info
+                        </p>
+                        <div class="row">
+                      
+                          <div class="col-md-6">
+                            <div class="form-group row">
+                              <label class="col-sm-3 col-form-label">Agent Name</label>
+                              <div class="col-sm-9">
+                                  <select  class="form-control" style="height: 40px" id="agentName" name="contactPerson">
+                                    <% ourAgent.forEach(ourAgent => { %>
+                                      <option value="<%= ourAgent.agentName %>"><%= ourAgent.agentName %></option>
+                                   <% }); %>
+                                  </select>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-md-6">
+                            <div class="form-group row">
+                              <label class="col-sm-3 col-form-label">Select Type</label>
+                              <div class="col-sm-9">
+                                  <% let propertyType=["Select Property Type","Apartment", "Loft", 
+                                    "Office","House","Bungalow","Land"] %>
+                                  <select  class="form-control" style="height: 40px" name="propertyType"
+                                    value="<%= typeof propertyType != 'undefined' ? propertyType : '' %>">
+                                    <% propertyType.forEach((so)=> { %>
+                                    <option value="<%- so %>"><%- so %></option>
+                                    <% }) %>
+                                  </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group row">
+                              <label class="col-sm-3 col-form-label">Amount</label>
+                              <div class="col-sm-9">
+                                <input type="text" class="form-control" name="amount" placeholder="Property Price"
+                                value="<%= typeof amount != 'undefined' ? amount : '' %>">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group row">
+                              <label class="col-sm-3 col-form-label">Condition</label>
+                              <div class="col-sm-9">
+                                <% let houseCondition=["New", "Renovated", "Old" ] %>
+                                  <select  class="form-control" style="height: 40px"  name="houseCondition"
+                                    value="<%= typeof houseCondition != 'undefined' ? houseCondition : '' %>">
+                                    <% houseCondition.forEach((so)=> { %>
+                                    <option value="<%- so %>"><%- so %></option>
+                                    <% }) %>
+                                  </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group row">
+                              <label class="col-sm-3 col-form-label">Status</label>
+                              <div class="col-sm-9">
+                                <% let propertyStatus=["Shortlet", "For Rent","For Sale", "Sold" ] %>
+                                  <select  class="form-control" style="height: 40px"  name="propertyStatus"
+                                    value="<%= typeof propertyStatus != 'undefined' ? propertyStatus : '' %>">
+                                    <option value="" selected>Select Property Status</option>
+                                    <% propertyStatus.forEach((so)=> { %>
+                                    <option value="<%- so %>"><%- so %></option>
+                                    <% }) %>
+                                  </select>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group row">
+                              <label class="col-sm-3 col-form-label">Agent No.</label>
+                              <div class="col-sm-9">
+                                <input type="text" class="form-control" name="agentNumber" id="agentNumber" placeholder="Agent Number"
+                                value="<%= typeof agentNumber != 'undefined' ? agentNumber : '' %>" />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <p class="card-description">
+                          Address
+                        </p>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group row">
+                              <label class="col-sm-3 col-form-label">Address</label>
+                              <div class="col-sm-9">
+                                <input type="text" class="form-control" name="address" 
+                                value="<%= typeof address != 'undefined' ? address : '' %>" />
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group row">
+                              <label class="col-sm-3 col-form-label">City</label>
+                              <div class="col-sm-9">
+                                <% let city=["Lagos Island", "Ikeja", "Victoria Island", "Ikoyi", "Apapa", "Surulere", "Yaba", "Agege", "Ikorodu", "Badagry", "Epe", "Festac Town", "Lekki", "Ajah", "Maryland", "Oshodi", "Mushin", "Bariga", "Ojodu", "Alimosho", "Egbeda", "Ikotun", "Isheri-Olofin", "Ketu", "Isolo", "Okota", "Ojo", "Alaba"] %>
+                                  <select  class="form-control" style="height: 40px"  name="city" 
+                                    value="<%= typeof city != 'undefined' ? city : '' %>">
+                                    <% city.forEach((so)=> { %>
+                                    <option value="<%- so %>"><%- so %></option>
+                                    <% }) %>
+                                  </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group row">
+                              <label class="col-sm-3 col-form-label">State</label>
+                              <div class="col-sm-9">
+                                <% let state=["Lagos", "Ogun State"] %>
+                                  <select  class="form-control"style="height: 40px"  name="state" 
+                                    value="<%= typeof state != 'undefined' ? state : '' %>">
+                                    <% state.forEach((so)=> { %>
+                                    <option value="<%- so %>"><%- so %></option>
+                                    <% }) %>
+                                  </select>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group row">
+                              <label class="col-sm-3 col-form-label">Country</label>
+                              <div class="col-sm-9">
+                                <% let country=["Nigeria"] %>
+                                  <select  class="form-control" style="height: 40px"  name="country" 
+                                    value="<%= typeof country != 'undefined' ? country : '' %>">
+                                    <% country.forEach((so)=> { %>
+                                    <option value="<%- so %>"><%- so %></option>
+                                    <% }) %>
+                                  </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <p class="card-description">
+                          Property Information
+                        </p>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group row">
+                              <label class="col-sm-3 col-form-label">Heading</label>
+                              <div class="col-sm-9">
+                                <input type="text" class="form-control" name="heading" placeholder="Property Heading"
+                                value="<%= typeof heading != 'undefined' ? heading : '' %>"/>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-md-6">
+                            <div class="form-group row">
+                              <label class="col-sm-3 col-form-label">Size in ft</label>
+                              <div class="col-sm-9">
+                                <input type="number" class="form-control" name="sizeinFt" placeholder="Size in ft number only"
+                                value="<%= typeof sizeinFt != 'undefined' ? sizeinFt : '' %>"/>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group row">
+                              <label class="col-sm-3 col-form-label">Bedrooms</label>
+                              <div class="col-sm-9">
+                                <input type="text" class="form-control" name="bedrooms" placeholder="Bedrooms"
+                                value="<%= typeof bedrooms != 'undefined' ? bedrooms : '' %>"/>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-md-6">
+                            <div class="form-group row">
+                              <label class="col-sm-3 col-form-label">Bathrooms</label>
+                              <div class="col-sm-9">
+                                <input type="text" class="form-control" name="bathrooms" placeholder="Bathrooms"
+                                value="<%= typeof bathrooms != 'undefined' ? bathrooms : '' %>"/>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group row">
+                              <label class="col-sm-3 col-form-label">Garages</label>
+                              <div class="col-sm-9">
+                                <input type="text" class="form-control" name="garages" placeholder="Garages"
+                                value="<%= typeof garages != 'undefined' ? garages : '' %>"/>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-md-6">
+                            <div class="form-group row">
+                              <label class="col-sm-3 col-form-label">Pool</label>
+                              <div class="col-sm-9">
+                                <input type="text" class="form-control" name="pool" placeholder="Swimming Pool"
+                                value="<%= typeof pool != 'undefined' ? pool : '' %>"/>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group row">
+                              <label class="col-sm-3 col-form-label">Year built </label>
+                              <div class="col-sm-9">
+                                <input type="number" class="form-control" name="yearBuilt" placeholder="Year built"
+                                value="<%= typeof yearBuilt != 'undefined' ? yearBuilt : '' %>"/>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-md-6">
+                            <div class="form-group row">
+                              <label class="col-sm-3 col-form-label">Availability</label>
+                              <div class="col-sm-9">
+                                <input type="date" class="form-control" name="availableFrom" placeholder="Available from "
+                                value="<%= typeof availableFrom != 'undefined' ? availableFrom : '' %>"/>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group row">
+                              <!-- <label>File upload</label> -->
+                              <label class="col-sm-3 col-form-label">Upload 5 Images</label>
+                              <div class="col-sm-9">
+                                <input type="file" name="images" class="form-control file-upload-info" placeholder="Upload Image" multiple >
+                               
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-md-6">
+                            <div class="form-group ">
+                              <label for="exampleTextarea1">House Description</label>
+                                <textarea class="form-control" placeholder="Enter house Description..."  rows="4" maxlength="250" name="description" value="<%= typeof description != 'undefined' ? description : '' %>"></textarea>
+                            </div>
+                          </div>
+                        </div>
+
+                      </form>
+                    </div>
+                  </div>
+                </div>
+
+                
+
+               
+         </div>
+      
+         <%- include (`../partials/adminFooter`); -%>
+     
+        </div>
+   
+      </div>
+  
+    </div>
+
+ 
+ 
+
+ 
+
+  </body>
+</html>

@@ -1,21 +1,20 @@
 const mongoose = require(`mongoose`);
+const AdminSchema = new mongoose.Schema({
 
-
-const aSchema = new mongoose.Schema({
-
-    fullName:{
+    
+    adminFullName:{
         type: String,
         required: true
     },
-    username:{
+    adminUsername:{
         type: String,
         required: true
     },
-    password:{
+    adminPassword:{
         type: String,
         required: true
     },
-    adminAddress:{
+    adminEmail:{
         type: String,
         required: true
     },
@@ -23,9 +22,42 @@ const aSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    role:{
+    adminAddress:{
         type: String,
         required: true
+    },
+    adminCity:{
+        type: String,
+        required: true
+    },
+    adminState:{
+        type: String,
+        required: true
+    },
+    adminRole:{
+        type: String,
+        required: true
+    },
+    adminDob:{
+        type: String,
+        required: true
+    },
+    adminEmergencyName:{
+        type: String,
+        required: true
+    },
+    adminEmergencyNumber:{
+        type: String,
+        required: true
+    },
+    adminEmployDate:{
+        type: String,
+        required: true
+    },
+    image: {
+
+        data: Buffer,
+        contentType: String
     },
     date_added: {
         type: Date,
@@ -34,10 +66,7 @@ const aSchema = new mongoose.Schema({
 
 });
 
-const Admin = new mongoose.model(`admin`, aSchema);
 
+const Admin = mongoose.model('adminData', AdminSchema);
 
-module.exports =   Admin
-
-
-
+module.exports =  Admin

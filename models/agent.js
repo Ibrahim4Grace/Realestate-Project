@@ -34,18 +34,22 @@ const aSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    agentDetails:{
+    agentBio:{
         type:String,
         required:true
     },
     image:{
         data: Buffer,
         contentType: String
+    },
+    date_added: {
+        type: Date,
+        default: Date.now()
     }
 });
 
-const OurAgent = mongoose.model('ourAgents', aSchema);
+const Agent = mongoose.model('ourAgents', aSchema);
 
 
-module.exports = OurAgent
+module.exports = Agent
 

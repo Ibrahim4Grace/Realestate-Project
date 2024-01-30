@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Korex Hospital</title>
+    <!-- base:css -->
+    <link rel="stylesheet" href="../font/typicons.css">
+    <link rel="stylesheet" href="../css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="../vertical-layout-light/style.css">
+    <!-- <link rel="stylesheet" href="../css/style.css"> -->
+    <link rel="stylesheet" href="../css/dashboardstyle.css">
+
+
+    <!-- endinject -->
+    <link rel="icon" href="../img/logos.jpg">
+  </head>
+  <body>
+    <div class="container-scroller">
+      <!-- partial:partials/_navbar.html -->
+      <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+          <a class="navbar-brand brand-logo" href="/backend/dashboard"><img src="../img/logos.jpg" alt="logo"/></a>
+          <a class="navbar-brand brand-logo-mini" href="/backend/dashboard"><img src="../img/logos.jpg" alt="logo"/></a>
+          <button class="navbar-toggler navbar-toggler align-self-center d-none d-lg-flex" type="button" data-toggle="minimize">
+            <span class="typcn typcn-th-menu"></span>
+          </button>
+        </div>
+
+        <%- include (`../partials/adminNav`); -%>
+      </nav>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_settings-panel.html -->
+        <div class="theme-setting-wrapper">
+          <div id="settings-trigger"><i class="typcn typcn-cog-outline"></i></div>
+          <div id="theme-settings" class="settings-panel">
+            <i class="settings-close typcn typcn-delete-outline"></i>
+            <p class="settings-heading">SIDEBAR SKINS</p>
+            <div class="sidebar-bg-options" id="sidebar-light-theme">
+              <div class="img-ss rounded-circle bg-light border mr-3"></div>
+              Light
+            </div>
+            <div class="sidebar-bg-options selected" id="sidebar-dark-theme">
+              <div class="img-ss rounded-circle bg-dark border mr-3"></div>
+              Dark
+            </div>
+            <p class="settings-heading mt-2">HEADER SKINS</p>
+            <div class="color-tiles mx-0 px-4">
+              <div class="tiles success"></div>
+              <div class="tiles warning"></div>
+              <div class="tiles danger"></div>
+              <div class="tiles primary"></div>
+              <div class="tiles info"></div>
+              <div class="tiles dark"></div>
+              <div class="tiles default border"></div>
+            </div>
+          </div>
+        </div>
+        <!-- partial -->
+        <!-- partial:partials/_sidebar.html -->
+        <%- include (`../partials/adminSidebar`); -%>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+               
+              
+                <%- include (`../partials/messages`); -%>
+
+                <div class="row">
+                    <div class="flex-banner">
+                        <div class="flex-bannerBox1">
+                            <div class="innerTwo">All Properties 
+                                        <div class="number-container">
+                                            <span class="count-number">500</span>
+                                        </div>
+                                   
+                            </div>
+                            <span class="innerOne">
+                                <svg width="39" height="39" fill="none" stroke="#0b0909" stroke-linecap="round"
+                                   stroke-linejoin="round" stroke-width="0.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M3.75 9.938V21a.75.75 0 0 0 .75.75H9v-6.375a1.125 1.125 0 0 1 1.125-1.125h3.75A1.125 1.125 0 0 1 15 15.375v6.375h4.5a.75.75 0 0 0 .75-.75V9.937"></path> <path d="m22.5 12-9.99-9.563c-.234-.248-.782-.25-1.02 0L1.5 11.999"></path><path d="M18.75 8.39V3H16.5v3.234"></path>
+                                </svg>
+                            </span>
+                        </div>
+                            <div class="flex-bannerBox2">
+                                <div class="innerTwo">Total Views 
+                                    <div class="number-container">
+                                        <span class="count-number">200</span>
+                                    </div>
+                               
+                                </div>
+                                <span class="innerOne">
+                                    <svg width="39" height="39" fill="none" stroke="#0b0909" stroke-linejoin="round" 
+                                        stroke-width="0.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M19.125 3H4.875A2.633 2.633 0 0 0 2.25 5.625v9a2.633 2.633 0 0 0 2.625 2.625H6.75V21l4.393-3.663a.375.375 0 0 1 .24-.087h7.742a2.633 2.633 0 0 0 2.625-2.625v-9A2.633 2.633 0 0 0 19.125 3Z"></path>
+                                    </svg>
+                                </span>
+                            </div>
+                                <div class="flex-bannerBox3"> 
+                                    <div class="innerTwo">Total Visitor Reviews
+                                        <div class="number-container">
+                                            <span class="count-number">59</span>
+                                        </div>
+                                   
+                                    </div>
+                                    <span class="innerOne">
+                                        <svg width="39" height="39" fill="none" stroke="#0b0909" stroke-linecap="round" 
+                                            stroke-linejoin="round" stroke-width="0.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M16.125 6.75c-.184 2.478-2.063 4.5-4.125 4.5-2.063 0-3.945-2.021-4.125-4.5-.188-2.578 1.64-4.5 4.125-4.5 2.484 0 4.312 1.969 4.125 4.5Z"></path>
+                                            <path d="M12 14.25c-4.078 0-8.217 2.25-8.983 6.497-.092.512.197 1.003.733 1.003h16.5c.536 0 .826-.491.734-1.003C20.217 16.5 16.078 14.25 12 14.25Z"></path>
+                                        </svg>
+                                    </span>
+                                </div>  
+                                    <div class="flex-bannerBox4">
+                                        <div class="innerTwo">Total Favorites
+                                            <div class="number-container">
+                                                <span class="count-number">109</span>
+                                            </div>
+                                       
+                                        </div>
+                                        <span class="innerOne">
+                                            <svg width="39" height="39" fill="none" stroke="#0b0909" stroke-linecap="round" 
+                                                stroke-linejoin="round" stroke-width="0.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M16.544 3.75c-3.043 0-4.543 3-4.543 3s-1.5-3-4.544-3C4.984 3.75 3.026 5.82 3 8.288c-.051 5.125 4.066 8.77 8.579 11.832a.75.75 0 0 0 .843 0c4.512-3.063 8.63-6.707 8.578-11.832-.025-2.469-1.983-4.538-4.456-4.538Z"></path>
+                                            </svg>
+                                        </span>
+                                    </div>
+                         
+                   
+    
+                   </div>
+                   
+                </div>
+
+
+
+                <div class="row">
+                  
+                    <div class="col-xl-6 d-flex grid-margin stretch-card">
+                      <div class="card">
+                        <div class="card-body">
+                          <div class="d-flex flex-wrap justify-content-between">
+                            <h4 class="card-title mb-3">Sales Analytics</h4>
+                            <button type="button" class="btn btn-sm btn-light">Month</button>
+                          </div>
+                          <div class="row">
+                            <div class="col-12">
+                              <div class="d-md-flex mb-4">
+                                <div class="mr-md-5 mb-4">
+                                  <h5 class="mb-1"><i class="typcn typcn-globe-outline mr-1"></i>Online</h5>
+                                  <h2 class="text-primary mb-1 font-weight-bold">93,342</h2>
+                                </div>
+                                <div class="mr-md-5 mb-4">
+                                  <h5 class="mb-1"><i class="typcn typcn-archive mr-1"></i>Offline</h5>
+                                  <h2 class="text-secondary mb-1 font-weight-bold">83,221</h2>
+                                </div>
+                                <div class="mr-md-5 mb-4">
+                                  <h5 class="mb-1"><i class="typcn typcn-tags mr-1"></i>Marketing</h5>
+                                  <h2 class="text-warning mb-1 font-weight-bold">30,542</h2>
+                                </div>
+                              </div>
+                              <canvas id="salesanalyticChart"></canvas>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                 
+                   
+                     
+
+                            <div class="main-dashboard">
+              
+                                <div class="aside-box">
+                                    <div class="aside-box1"> 
+                                        <div class="aside-words">Your listing <strong>House in Yaba</strong> has been approved</div>
+                                        <div class="aside-inner">
+                                            <svg width="30" height="30" fill="none" stroke="#0b0909" stroke-linecap="round"
+                                               stroke-linejoin="round" stroke-width="0.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                              <path d="M3.75 9.938V21a.75.75 0 0 0 .75.75H9v-6.375a1.125 1.125 0 0 1 1.125-1.125h3.75A1.125 1.125 0 0 1 15 15.375v6.375h4.5a.75.75 0 0 0 .75-.75V9.937"></path> <path d="m22.5 12-9.99-9.563c-.234-.248-.782-.25-1.02 0L1.5 11.999"></path><path d="M18.75 8.39V3H16.5v3.234"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                
+                                        <div class="aside-box2">
+                                            <div class="aside-words">Your listing <strong>House on the Island</strong> has been approved</div>
+                                            <div class="aside-inner">
+                                                <svg width="30" height="30" fill="none" stroke="#0b0909" stroke-linejoin="round" 
+                                                    stroke-width="0.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M19.125 3H4.875A2.633 2.633 0 0 0 2.25 5.625v9a2.633 2.633 0 0 0 2.625 2.625H6.75V21l4.393-3.663a.375.375 0 0 1 .24-.087h7.742a2.633 2.633 0 0 0 2.625-2.625v-9A2.633 2.633 0 0 0 19.125 3Z"></path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                     
+                                            <div class="aside-box3">
+                                                <div class="aside-words">William Adewale <strong>left a review on House</strong> on ikoyi</div>
+                                                <div class="aside-inner">
+                                                    <svg width="30" height="30" fill="none" stroke="#0b0909" stroke-linecap="round" 
+                                                    stroke-linejoin="round" stroke-width="0.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M16.125 6.75c-.184 2.478-2.063 4.5-4.125 4.5-2.063 0-3.945-2.021-4.125-4.5-.188-2.578 1.64-4.5 4.125-4.5 2.484 0 4.312 1.969 4.125 4.5Z"></path>
+                                                    <path d="M12 14.25c-4.078 0-8.217 2.25-8.983 6.497-.092.512.197 1.003.733 1.003h16.5c.536 0 .826-.491.734-1.003C20.217 16.5 16.078 14.25 12 14.25Z"></path>
+                                                </svg>
+                                                </div>
+                                            </div>
+                
+                                                <div class="aside-box4">
+                                                    <div class="aside-words">Someone favorites your <strong>5bedroom Mansion</strong> for Rent</div>
+                                                    <div class="aside-inner">
+                                                        <svg width="39" height="39" fill="none" stroke="#0b0909" stroke-linecap="round" 
+                                                         stroke-linejoin="round" stroke-width="0.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                         <path d="M16.544 3.75c-3.043 0-4.543 3-4.543 3s-1.5-3-4.544-3C4.984 3.75 3.026 5.82 3 8.288c-.051 5.125 4.066 8.77 8.579 11.832a.75.75 0 0 0 .843 0c4.512-3.063 8.63-6.707 8.578-11.832-.025-2.469-1.983-4.538-4.456-4.538Z"></path>
+                                                       </svg>
+                                                    </div>
+                                                </div>
+                                                <a class="view-btn"  href="/#">View More</a>
+                                </div>
+                              
+                            </div>
+
+                           
+                      
+                      
+
+                  </div>
+                  
+          
+          <!-- appointent table -->
+        
+         </div>
+   
+         <%- include (`../partials/adminFooter`); -%>
+       
+        </div>
+    
+      </div>
+  
+    </div>
+ 
+ 
+
+ 
+
+  </body>
+</html>

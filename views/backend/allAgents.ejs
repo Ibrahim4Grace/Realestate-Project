@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Korex RealEstate</title>
+    <!-- base:css -->
+    <link rel="stylesheet" href="../font/typicons.css">
+    <link rel="stylesheet" href="../css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="../vertical-layout-light/style.css">
+    <!-- endinject -->
+    <link rel="icon" href="../img/logos.jpg">
+  </head>
+  <body>
+    <div class="container-scroller">
+      <!-- partial:partials/_navbar.html -->
+      <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+          <a class="navbar-brand brand-logo" href="/backend/dashboard"><img src="../img/logos.jpg" alt="logo"/></a>
+          <a class="navbar-brand brand-logo-mini" href="/backend/dashboard"><img src="../img/logos.jpg" alt="logo"/></a>
+          <button class="navbar-toggler navbar-toggler align-self-center d-none d-lg-flex" type="button" data-toggle="minimize">
+            <span class="typcn typcn-th-menu"></span>
+          </button>
+        </div>
+
+        <%- include ('../partials/adminNav'); -%>
+      </nav>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_settings-panel.html -->
+        <div class="theme-setting-wrapper">
+          <div id="settings-trigger"><i class="typcn typcn-cog-outline"></i></div>
+          <div id="theme-settings" class="settings-panel">
+            <i class="settings-close typcn typcn-delete-outline"></i>
+            <p class="settings-heading">SIDEBAR SKINS</p>
+            <div class="sidebar-bg-options" id="sidebar-light-theme">
+              <div class="img-ss rounded-circle bg-light border mr-3"></div>
+              Light
+            </div>
+            <div class="sidebar-bg-options selected" id="sidebar-dark-theme">
+              <div class="img-ss rounded-circle bg-dark border mr-3"></div>
+              Dark
+            </div>
+            <p class="settings-heading mt-2">HEADER SKINS</p>
+            <div class="color-tiles mx-0 px-4">
+              <div class="tiles success"></div>
+              <div class="tiles warning"></div>
+              <div class="tiles danger"></div>
+              <div class="tiles primary"></div>
+              <div class="tiles info"></div>
+              <div class="tiles dark"></div>
+              <div class="tiles default border"></div>
+            </div>
+          </div>
+        </div>
+        <!-- partial -->
+        <!-- partial:partials/_sidebar.html -->
+        <%- include('../partials/adminSidebar'); -%>
+
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+
+              
+                <%- include (`../partials/messages`); -%>
+
+          
+                <div class="col-lg-12 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                      <h4 class="card-title">Agents List</h4>
+                      
+                      <div class="table-responsive pt-3">
+                        <table class="table table-bordered">
+                          <thead>
+                            <tr>
+                                <th>Agent Image</th>
+                                <th>Agent Name</th>
+                                <th>Agent Number</th>
+                                <th>Agent Postion</th>
+                                <th>Agent Bio</th>
+                                <th>Emergency Name</th>
+                                <th>Employment Date</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                         </thead>
+                         <tbody>
+                            <% if (agent.length > 0) { %>
+                                <!-- Render the table here showing images in array -->
+                                <% agent.forEach(agent => { %>
+                                    <tr>
+                                        <td>                                            
+                                                    <img class="agentImage" src="data:<%= agent.image.contentType %>;base64,<%= agent.image.data.toString('base64') %>">
+                                                                                  
+                                        </td>
+                                        <td><%= agent.agentName %></td>
+                                        <td><%= agent.agentNumber %></td>
+                                        <td><%= agent.agentPosition %></td>
+                                        <td>
+                                            <% if (agent.agentBio) { %>
+                                                <%= agent.agentBio.substring(0, 10) + "..." %>
+                                                <a href="/backend/moreAboutAgent/<%= agent._id %>">More</a>
+                                            <% } else { %>
+                                                N/A
+                                            <% } %>
+                                        </td>
+                                        <td><%= agent.emergencyName %></td>
+                                       
+                                        <td><%= agent.employDate %></td>
+                                        <td data-label="Edit">
+                                            <a href="/backend/editAgent/<%= agent._id %>">
+                                                <i class="typcn typcn-pencil menu-icon" style="color: black;"></i>
+                                            </a>
+                                        </td>
+                                        <td data-label="Delete">
+                                            <a href="/backend/deleteAgent/<%= agent._id %>">
+                                               <i class="typcn typcn-trash menu-icon" style="color: black;"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <% }); %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="12">No Agents information to display.</td>
+                                </tr>
+                            <% } %>
+                        </tbody>               
+                        </table>
+                        <div class="pagination">
+                          <% for (let i=1; i <=totalPages; i++) { %>
+                              <a href="/backend/allAgents?page=<%= i %>"
+                                  class="<%= currentPage === i ? 'active' : '' %>">
+                                  <%= i %>
+                              </a>
+                              <% } %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              
+            
+
+        
+         </div>
+      
+         <%- include (`../partials/adminFooter`); -%>
+     
+        </div>
+   
+      </div>
+  
+    </div>
+
+ 
+ 
+
+ 
+
+  </body>
+</html>
