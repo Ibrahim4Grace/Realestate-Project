@@ -1,8 +1,5 @@
 const express = require(`express`)
 const router = express.Router();
-const mongoose = require(`mongoose`);
-const session = require('express-session');
-const flash = require('connect-flash');
 const nodemailer = require(`nodemailer`);
 const Properties  = require('../models/property');
 const { ContactUsEnquire, ContactUs } = require('../models/contact');
@@ -55,10 +52,9 @@ const agentPage = async(req, res) => {
 };
 
 const buySaleRentPage = async (req, res) => {
-    const page = parseInt(req.query.page) || 1;
-    const perPage = 5; // Number of items per page
-
     try {
+        const page = parseInt(req.query.page) || 1;
+        const perPage = 5; // Number of items per page    
         const totalPosts = await Properties.countDocuments();
         const totalPages = Math.ceil(totalPosts / perPage);
 
@@ -90,36 +86,44 @@ const propertyDetailsPage = (req, res) => {
 
 const searchPropertyPage = async (req, res) => {
     try {
-        const { propertyStatus, amount, propertyType, countryCity } = req.body;
+        const { propertyStatus, amount, propertyType, city } = req.body;
 
-        // Convert the amount to a number (assuming it's in a format like "$300,000")
-        const numericAmount = parseFloat(amount.replace(/[^\d.]/g, '')); // Remove non-numeric characters
-
-        const query = {
+        let query = {
             propertyStatus: { $regex: new RegExp(propertyStatus, 'i') },
-            amount: { $lte: numericAmount },
             propertyType: { $regex: new RegExp(propertyType, 'i') },
-            countryCity: { $regex: new RegExp(countryCity, 'i') }
+            city: { $regex: new RegExp(city, 'i') }
         };
+
+        if (amount && amount !== 'Any') {
+            if (amount === 'Below #50,000,000') {
+                // Exclude the amount condition, include all properties in that city
+            } else {
+                const numericAmount = parseFloat(amount.replace(/[^\d.]/g, ''));
+                query.amount = { $lte: numericAmount };
+            }
+        }
 
         const properties = await Properties.find(query);
 
-        res.render('searchProperty', { properties,countryCity,propertyType  });
+        res.render('searchProperty', { properties, city, propertyType, amount, propertyStatus });
     } catch (err) {
         console.error(err);
         res.redirect('/');
     }
 };
 
+
 const contactUsEnquirePost = async (req, res) => {
-  
+    console.log('Server route hit'); // Add this log
     const property_id = req.params.m_id;
+
+    console.log('Property ID:', property_id);
 
     // And in your server route, we can decode it using decodeURIComponent()
     const heading = decodeURIComponent(req.params.heading);
     const propertyType = decodeURIComponent(req.params.propertyType);
     const address = decodeURIComponent(req.params.address);
-    const countryCity = decodeURIComponent(req.params.countryCity);
+    const city = decodeURIComponent(req.params.city);
 
     const { flname, email, contactNumber, message} = req.body;
 
@@ -140,7 +144,7 @@ const contactUsEnquirePost = async (req, res) => {
             heading:heading,
             propertyType:propertyType,
             address:address,
-            countryCity:countryCity,
+            city:city,
             
             
         });
@@ -165,7 +169,7 @@ const contactUsEnquirePost = async (req, res) => {
                     <li>Phone Number: ${contactNumber}</li>
                  <li>Property Type: ${propertyType}</li>
                  <li>Home Address: ${address}</li>
-                 <li>City: ${countryCity}</li>
+                 <li>City: ${city}</li>
             </ul>
             
    
@@ -204,8 +208,8 @@ const contactUsEnquirePost = async (req, res) => {
                     console.log('Email sent:', info.response);
                 }
             });
-           
-            res.redirect('/buysalerent');
+          
+            res.status(200).redirect('/buysalerent');
         } catch (err) {
             console.error(err);
             req.flash('error', 'An error occurred while sending your message');
@@ -283,8 +287,7 @@ const contactUsPagePost = async (req, res) => {
                 }
             ]
          };
-
-          
+         
             transporter.sendMail(mailOptions, (error, info) => {
                 if (error) {
                     console.log('Email sending error:', error);
@@ -292,8 +295,8 @@ const contactUsPagePost = async (req, res) => {
                     console.log('Email sent:', info.response);
                 }
             });
-            // req.flash('success_msg', 'Message successfully sent.');
-            res.redirect('/');
+         
+            res.status(200).redirect('/contact');
         } catch (err) {
             console.log(err);
             req.flash('error', 'An error occurred while sending your message');

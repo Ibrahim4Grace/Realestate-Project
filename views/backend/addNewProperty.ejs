@@ -223,8 +223,8 @@
                             <div class="form-group row">
                               <label class="col-sm-3 col-form-label">Heading</label>
                               <div class="col-sm-9">
-                                <input type="text" class="form-control" name="heading" placeholder="Property Heading"
-                                value="<%= typeof heading != 'undefined' ? heading : '' %>"/>
+                                <input type="text" class="form-control" name="heading" placeholder="Property Heading" 
+                                 maxlength="44" value="<%= typeof heading != 'undefined' ? heading : '' %>"/>
                               </div>
                             </div>
                           </div>
@@ -296,7 +296,7 @@
 
                           <div class="col-md-6">
                             <div class="form-group row">
-                              <label class="col-sm-3 col-form-label">Availability</label>
+                              <label class="col-sm-3 col-form-label">Available From</label>
                               <div class="col-sm-9">
                                 <input type="date" class="form-control" name="availableFrom" placeholder="Available from "
                                 value="<%= typeof availableFrom != 'undefined' ? availableFrom : '' %>"/>

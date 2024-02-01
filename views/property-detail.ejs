@@ -10,27 +10,27 @@
 <div class="hot-properties hidden-xs">
 <h4>Hot Properties</h4>
 <div class="row">
-                <div class="col-lg-4 col-sm-5"><img src="../images/properties/4.jpg" class="img-responsive img-circle" alt="properties"/></div>
+                <div class="col-lg-4 col-sm-5"><img src="../img/properties/4.jpg" class="img-responsive img-circle" alt="properties"/></div>
                 <div class="col-lg-8 col-sm-7">
                   <h5><a href="/buysalerent">5bedrooms Duplex</a></h5>
                   <p class="price">#650,000,000</p> </div>
               </div>
 <div class="row">
-                <div class="col-lg-4 col-sm-5"><img src="../images/properties/1.jpg" class="img-responsive img-circle" alt="properties"/></div>
+                <div class="col-lg-4 col-sm-5"><img src="../img/properties/1.jpg" class="img-responsive img-circle" alt="properties"/></div>
                 <div class="col-lg-8 col-sm-7">
                   <h5><a href="/buysalerent">4bedrooms Duplex</a></h5>
                   <p class="price">#550,000,000</p> </div>
               </div>
 
 <div class="row">
-                <div class="col-lg-4 col-sm-5"><img src="../images/properties/3.jpg" class="img-responsive img-circle" alt="properties"/></div>
+                <div class="col-lg-4 col-sm-5"><img src="../img/properties/3.jpg" class="img-responsive img-circle" alt="properties"/></div>
                 <div class="col-lg-8 col-sm-7">
                   <h5><a href="/buysalerent">Mansion</a></h5>
                   <p class="price">#900,000,000</p> </div>
               </div>
 
 <div class="row">
-                <div class="col-lg-4 col-sm-5"><img src="../images/properties/2.jpg" class="img-responsive img-circle" alt="properties"/></div>
+                <div class="col-lg-4 col-sm-5"><img src="../img/properties/2.jpg" class="img-responsive img-circle" alt="properties"/></div>
                 <div class="col-lg-8 col-sm-7">
                   <h5><a href="/buysalerent">6bedrooms Duplex</a></h5>
                   <p class="price">#700,000,000</p> </div>
@@ -42,7 +42,7 @@
 
 <div class="advertisement">
   <h4>Advertisements</h4>
-  <img src="../images/tablet-near.jpg" class="img-responsive" alt="advertisement">
+  <img src="../img/tablet-near.jpg" class="img-responsive" alt="advertisement">
 
 </div>
 
@@ -126,7 +126,7 @@
  <div class="property-info">
  <p class="price"><%- properties.amount %></p>
   <p class="area"><span class="glyphicon glyphicon-map-marker">
-     </span> <%- properties.address %> <%- properties.countryCity%> <%- properties.countryState %> <%- properties.country %>
+     </span> <%- properties.address %> <%- properties.city%> <%- properties.state %> 
   </p>
   
   <div class="profile">
@@ -137,28 +137,29 @@
 
     <h6><span style="margin-left:15px" class="glyphicon glyphicon-home"></span> Availabilty</h6>
     <div style="margin-left:33px" class="listing-detail">
-    <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room"><%- properties.bedrooms %></span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room"><%- properties.rooms %></span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Parking"><%- properties.garages %></span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bathrooms"><%- properties.bathrooms %></span> </div>
+    <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room"><%- properties.bedrooms %></span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Swimming Pool"><%- properties.pool %></span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Parking"><%- properties.garages %></span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bathrooms"><%- properties.bathrooms %></span> </div>
 
  </div>
+
+
  <div class="col-lg-12 col-sm-6 ">
+  
  <div class="enquiry">
   <h6><span class="glyphicon glyphicon-envelope"></span> Post Enquiry</h6>
 
   <!-- Instead of including propertyType directly in the URL, you should encode it using encodeURIComponent() to ensure that it is safe for use in a URL.  -->
-      <form role="form"  id="enquiryForm" action="/contactUsEnquire/<%= properties._id %>/<%= encodeURIComponent(properties.heading) %>/<%= encodeURIComponent(properties.propertyType) %>/<%= encodeURIComponent(properties.address) %>/<%= encodeURIComponent(properties.countryCity) %>" method="post">
-                <input type="text" class="form-control" name="flname" placeholder="Full Name"/>
-                <input type="email" class="form-control" name="email" placeholder="you@yourdomain.com"/>
-                <input type="text" class="form-control" name="contactNumber" placeholder="your number"/>
-                <textarea rows="6" class="form-control" name="message" placeholder="Whats on your mind?"></textarea>
-      <button type="submit" class="btn btn-primary" name="Submit">Send Message</button>
-      </form>
-      <div id="thankYouMessage" style="display: none;">
+  <form role="form" id="formEnquiry" action="/contactUsEnquirePost/<%= properties._id %>/<%= encodeURIComponent(properties.heading) %>/<%= encodeURIComponent(properties.propertyType) %>/<%= encodeURIComponent(properties.address) %>/<%= encodeURIComponent(properties.city) %>" method="post">
+    <input type="text" class="form-control" id="flname" name="flname" placeholder="Full Name" />
+    <input type="email" class="form-control" id="email" name="email" placeholder="you@yourdomain.com" />
+    <input type="text" class="form-control" id="contactNumber" name="contactNumber" placeholder="your number" />
+    <textarea rows="6" class="form-control" id="message" name="message" placeholder="Whats on your mind?"></textarea>
+    <button type="submit" class="btn btn-primary" name="Submit">Send Message</button>
+</form>
+      <div id="enquiryMessage" style="display: none;">
         Thank you, your message has been sent. An agent will get back to you shortly.
       </div>
-      <script src="../assets/js/loopple/notification.js"></script>
-     
-
-
+    
+  
  </div>         
 </div>
   </div>
@@ -167,7 +168,6 @@
 </div>
 </div>
 </div>
-
 
 
 <%- include(`partials/footer`); -%>

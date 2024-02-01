@@ -8,10 +8,10 @@
   <div class="col-lg-6 col-sm-6 ">
     <form id="enquiryForm" action="/contactUsPagePost" method="post" >
 
-                <input type="text" class="form-control" id="name" name="flname" placeholder="Full Name">
+                <input type="text" class="form-control" id="flname" name="flname" placeholder="Full Name">
                 <input type="email" class="form-control" id="email" name="email" placeholder="Email Address">
-                <input type="text" class="form-control" id="number" name="contactNumber" placeholder="Contact Number">
-                <textarea rows="6" class="form-control" id="message" name="message" placeholder="Message" maxlength="250"></textarea>
+                <input type="text" class="form-control" id="contactNumber" name="contactNumber" placeholder="Contact Number">
+                <textarea rows="6" class="form-control" id="message" name="message" placeholder="What's on your mind..." maxlength="250"></textarea>
                 <button type="submit" class="btn btn-success" name="Submit">Send Message</button>
     </form>
     <div id="thankYouMessage" style="display: none;">
@@ -26,7 +26,6 @@
 </div>
 </div>
 </div>
-
 <%- include(`partials/footer`); -%>
 
 

@@ -1,9 +1,6 @@
 
 const express = require(`express`)
 const router = express.Router();
-const mongoose = require(`mongoose`);
-const session = require('express-session');
-const flash = require('express-flash');
 const bcrypt = require('bcryptjs');
 const fs = require('fs');
 const path = require('path');
@@ -54,22 +51,6 @@ const adminloginPagePost = (req, res, next) => {
   })(req, res, next);
 };
 
-// const adminDashboard = async (req, res) => {
-//     try {
-       
-//         const admin = await Admin.findById(req.user);
-  
-//         if (admin) {
-//             const name = admin.fullName; 
-//             res.render('dashboard', { name });
-//         } else {
-//             res.render('dashboard', { name: 'Guest' }); // Handle the case where the admin is not found
-//         }
-//     } catch (error) {
-//         console.error(error);
-//         res.render('dashboard', { name: 'Guest' }); // Handle errors gracefully
-//     }
-// };
 
 const adminDashboard = async (req, res) => {
   // Access the authenticated admin user
@@ -720,7 +701,6 @@ const addNewProperty = async (req, res) => {
 };
 
 
-
 //IF WE WANT OUR IMAGES TO GO INOT DIFFERENT FOLDER
 let st = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -754,13 +734,18 @@ const addNewPropertyPost = async (req, res) => {
           availableFrom,description,admin,
         });
       }
-      
-      const MAX_IMAGES_ALLOWED = process.env.MAX_IMAGES_ALLOWED || 5;
 
-      // Check if images were uploaded
-    if (!req.files || req.files.length === 0 || req.files.length >= MAX_IMAGES_ALLOWED) {
-      errors.push({ msg: `Please upload at least one image or maximum ${MAX_IMAGES_ALLOWED} images.` });
-    }
+      // Check minimum number of uploaded images
+      const MIN_IMAGES_REQUIRED = process.env.MIN_IMAGES_REQUIRED;
+      if (req.files.length < MIN_IMAGES_REQUIRED) {
+        errors.push({ msg: `Please upload a minimum of ${MIN_IMAGES_REQUIRED} images.` });
+      }
+
+       // Check if images were uploaded
+       const MAX_IMAGES_ALLOWED = process.env.MAX_IMAGES_ALLOWED;
+       if (!req.files || req.files.length === 0 || req.files.length >= MAX_IMAGES_ALLOWED) {
+        errors.push({ msg: `Please upload at least one image or maximum ${MAX_IMAGES_ALLOWED} images.` });
+      }
 
       // Extract an array of images from req.files
       const images = req.files.map((file) => ({
@@ -808,7 +793,6 @@ const myProperties = async (req, res) => {
 
 const searchProperties = async (req, res) => {
   try {
-
     const admin = req.user
     const coCity = req.body.city;
     const query = {
@@ -823,8 +807,90 @@ const searchProperties = async (req, res) => {
 };
 
 const moreAboutProperty = async (req, res) => {
+  try {
+    const admin = req.user;
+    const proProfile = req.params.m_id;
   
+    const proInfo = await Properties.findOne({ _id: proProfile });
+    if (!proInfo) {
+      return res.status(404).send(`Appointment not found`);
+    }
+      res.render(`backend/moreAboutProperty`, { proInfo,admin });
+    } catch (err) {
+      console.error(err);
+      res.status(500).send(`There's a problem selecting from DB`);
+    }
 };
+
+const editPropertyPage = (req, res) => {
+  const admin = req.user;
+  const prop = Properties.findOne({ _id: req.params.m_id })
+  .then((recs) => {
+    res.render(`backend/editProperty`, { properties: recs,admin })
+  })
+  .catch((err) => {
+    res.send(`There's a problem selecting from DB`);
+    res.redirect('/backend/myProperties');
+    console.error(err);
+  }) 
+};
+
+const editPropertyPagePost = async (req, res) => {
+  try {
+    const admin = req.user;
+    let errors = [];
+    const mu_id = req.params.m_id;
+
+    const { contactPerson, propertyType, amount, houseCondition, propertyStatus, agentNumber, address, city, state, country, heading, sizeinFt, bedrooms, bathrooms, garages, pool, yearBuilt, availableFrom, description } = req.body;
+
+    // Check if a new image was uploaded
+    let newImages = [];
+    if (req.files && req.files.length > 0) {
+        newImages = req.files.map(file => ({
+            data: fs.readFileSync(path.join(__dirname, '../public/houseImage/' + file.filename)),
+            contentType: file.mimetype, // Use the file's mimetype
+        }));
+    }
+
+    // Find the existing property to get the current images
+    const existingProperty = await Properties.findById(mu_id);
+
+    // Retain the existing images and add the new image if available
+    const propertyImages = req.files ? [...existingProperty.images, ...newImages] : existingProperty.images;
+
+
+
+    // Check maximum length of heading
+    if (heading.length < 30) {
+      req.flash('error', 'Minimum character count for heading is 30.');
+      return res.redirect(`/backend/editProperty/${mu_id}`);
+    }
+
+    if (heading.length > 44) {
+      req.flash('error', 'Maximum character count for heading is 44.');
+      return res.redirect(`/backend/editProperty/${mu_id}`);
+    }
+
+    if (description.length > 250) {
+      req.flash('error', 'Maximum character count for description is 250.');
+      return res.redirect(`/backend/editProperty/${mu_id}`);
+    }
+
+    await Properties.findByIdAndUpdate(mu_id, {
+      $set: {
+        contactPerson, propertyType, amount, houseCondition, propertyStatus, agentNumber, address, city, state, country, heading, sizeinFt, bedrooms, bathrooms, garages, pool, yearBuilt, availableFrom, description, images: propertyImages, admin
+      }
+    });
+
+    req.flash('success_msg', 'Property Successfully Updated');
+    res.redirect('/backend/myProperties');
+  } catch (err) {
+    console.error(err);
+    req.flash('error', 'There is an issue with your information');
+    res.redirect('/backend/myProperties');
+  }
+};
+
 
 const deleteProperty = (req, res) => {
   const mid = req.params.m_id;
@@ -838,8 +904,87 @@ const deleteProperty = (req, res) => {
   })
 };
 
+const contactUsPage = async (req, res) => {
+  try {
+    const admin = req.user;
+    const page = parseInt(req.query.page) || 1;
+    const perPage = 5; // Number of items per page
+    const totalPosts = await ContactUs.countDocuments();
+    const totalPages = Math.ceil(totalPosts / perPage);
+  
+    const contactUs = await ContactUs.find()
+        .sort({ date_added: -1 }) // Sort by
+        .skip((page - 1) * perPage)
+        .limit(perPage);
+    res.render('backend/contactUs', { contactUs, admin, totalPages, currentPage: page });
+  }catch (err) {
+    console.error(err);
+    res.redirect('backend/dashboard');
+  } 
+};
+
+const deleteContactUs = (req, res) => {
+  const mid = req.params.m_id;
+  ContactUs.findByIdAndDelete(mid)
+  .then(() => {
+    req.flash(`success_msg`, 'Contact deleted successfully');
+    res.redirect(`/backend/contactUs`)
+  })
+  .catch(() => {
+    res.send(`error`)
+  }) 
+};
+
+const houseEnquireforum = async (req, res) => {
+  try {
+    const admin = req.user;
+    const page = parseInt(req.query.page) || 1;
+    const perPage = 5; // Number of items per page
+    const totalPosts = await ContactUsEnquire.countDocuments();
+    const totalPages = Math.ceil(totalPosts / perPage);
+  
+    const contactEnquire = await ContactUsEnquire.find()
+        .sort({ date_added: -1 }) // Sort by
+        .skip((page - 1) * perPage)
+        .limit(perPage);
+    res.render('backend/houseEnquireforum', { contactEnquire, admin, totalPages, currentPage: page });
+  }catch (err) {
+    console.error(err);
+    res.redirect('backend/dashboard');
+  } 
+};
+
+const deletecontactEnquire = (req, res) => {
+  const mid = req.params.m_id;
+  ContactUsEnquire.findByIdAndDelete(mid)
+  .then(() => {
+    req.flash(`success_msg`, 'Contact deleted successfully');
+    res.redirect(`/backend/houseEnquireforum`)
+  })
+  .catch(() => {
+    res.send(`error`)
+  }) 
+};
+
+// Admin logout
+const adminLogout = (req, res) => {
+  // Perform logout logic (e.g., destroy the session)
+  req.logout((err) => {
+      if (err) {
+          console.error('Error during logout:', err);
+      }
+      res.clearCookie('connect.sid'); // Clear session cookie
+              res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+              res.header('Pragma', 'no-cache');
+              res.header('Expires', '-1');
+              req.session.destroy(); // Clear the session
+      res.redirect('/');
+  });
+};
+
+
 module.exports = ({
-  adminloginPage,adminloginPagePost,adminDashboard,adminPage,uploads,adminPagePost,allAdmin,viewAdminProfile,editAdminProfile,editAdminProfilePost,deleteAdminProfile,myAgentsPage,upl,myAgentsPagePost,allAgentsPage,moreAboutAgent,editAgentPage,editAgentPagePost,deleteAgent,addNewProperty,upload,addNewPropertyPost,myProperties,searchProperties,moreAboutProperty,      deleteProperty
+  adminloginPage,adminloginPagePost,adminDashboard,adminPage,uploads,adminPagePost,allAdmin,viewAdminProfile,editAdminProfile,editAdminProfilePost,deleteAdminProfile,myAgentsPage,upl,myAgentsPagePost,allAgentsPage,moreAboutAgent,editAgentPage,editAgentPagePost,deleteAgent,addNewProperty,upload,addNewPropertyPost,myProperties,searchProperties,moreAboutProperty,editPropertyPage,editPropertyPagePost,deleteProperty,contactUsPage,deleteContactUs,houseEnquireforum,deletecontactEnquire,adminLogout
 
 
 

@@ -97,17 +97,17 @@
             <div class="col-lg-3 col-sm-3 ">
               <% let propertyStatus=["Shortlet", "For Rent","For Sale"] %>
               <select class="form-control" name="propertyStatus" required>
-                <% propertyStatus.forEach((so)=> { %>
-                  <option value="<%- so %>"><%- so %></option>
+                <% propertyStatus.forEach((type)=> { %>
+                  <option value="<%- type %>"><%- type %></option>
               <% }) %>
               </select>
             </div>
 
             <div class="col-lg-3 col-sm-4">
-              <% let amount=["#50,000,000", "#100,000,000", "#200,000,000","#300,000,000","Above"] %>
+              <% let amount=["Below #50,000,000","#50,000,000", "#100,000,000", "#200,000,000","#300,000,000","Above"] %>
               <select class="form-control" name="amount" required>
-                <% amount.forEach((so)=> { %>
-                  <option value="<%- so %>"><%- so %></option>
+                <% amount.forEach((type)=> { %>
+                  <option value="<%- type %>"><%- type %></option>
               <% }) %>
               </select>
             </div>
@@ -115,24 +115,24 @@
             <div class="col-lg-3 col-sm-4">
               <% let propertyType=["Apartment", "Loft", "Office","House","Bungalow","Land"] %>
                <select  class="form-control" name="propertyType" required>
-                   <% propertyType.forEach((so)=> { %>
-                  <option value="<%- so %>"><%- so %></option>
+                   <% propertyType.forEach((type)=> { %>
+                  <option value="<%- type %>"><%- type %></option>
               <% }) %>
               </select>
             </div>
 
             <div class="col-lg-3 col-sm-4">
-              <% let countryCity=["Lagos Island", "Ikeja", "Victoria Island", "Ikoyi", "Apapa", "Surulere", "Yaba", "Agege", "Ikorodu", "Badagry", "Epe", "Festac Town", "Lekki", "Ajah", "Maryland", "Oshodi", "Mushin", "Bariga", "Ojodu", "Alimosho", "Egbeda", "Ikotun", "Isheri-Olofin", "Ketu", "Isolo", "Okota", "Ojo", "Alaba"] %>
-              <select class="form-control" name="countryCity" required>
-                <% countryCity.forEach((so)=> { %>
-                  <option value="<%- so %>"><%- so %></option>
+              <% let city=["Lagos Island", "Ikeja", "Victoria Island", "Ikoyi", "Apapa", "Surulere", "Yaba", "Agege", "Ikorodu", "Badagry", "Epe", "Festac Town", "Lekki", "Ajah", "Maryland", "Oshodi", "Mushin", "Bariga", "Ojodu", "Alimosho", "Egbeda", "Ikotun", "Isheri-Olofin", "Ketu", "Isolo", "Okota", "Ojo", "Alaba"] %>
+              <select class="form-control" name="city" required>
+                <% city.forEach((type)=> { %>
+                  <option value="<%- type %>"><%- type %></option>
               <% }) %>
               </select>
             </div>
 
 
               <div class="col-lg-3 col-sm-4">
-              <button class="btn btn-success"  onclick="window.location.href='buysalerent.php'">Find Now</button>
+              <button class="btn btn-success" type="submit">Find Now</button>
               </div>
           </div>  
         </div>  
@@ -159,7 +159,7 @@
                   <p class="price">Price: <%- result.amount %></p>
                   <div class="listing-detail">
                       <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room"><%- result.bedrooms %></span>
-                      <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room"><%- result.rooms %></span>
+                      <span data-toggle="tooltip" data-placement="bottom" data-original-title="Swimming Pool"><%- result.pool %></span>
                       <span data-toggle="tooltip" data-placement="bottom" data-original-title="Parking"><%- result.garages %></span>
                       <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bathrooms"><%- result.bathrooms %></span>
                   </div>

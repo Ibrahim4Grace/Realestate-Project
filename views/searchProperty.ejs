@@ -8,27 +8,27 @@
                 <div class="hot-properties hidden-xs">
                     <h4>Hot Properties</h4>
                     <div class="row">
-                                    <div class="col-lg-4 col-sm-5"><img src="../images/properties/4.jpg" class="img-responsive img-circle" alt="properties"/></div>
+                                    <div class="col-lg-4 col-sm-5"><img src="../img/properties/4.jpg" class="img-responsive img-circle" alt="properties"/></div>
                                     <div class="col-lg-8 col-sm-7">
                                       <h5><a href="/buysalerent">5bedrooms Duplex</a></h5>
                                       <p class="price">#650,000,000</p> </div>
                                   </div>
                     <div class="row">
-                                    <div class="col-lg-4 col-sm-5"><img src="../images/properties/1.jpg" class="img-responsive img-circle" alt="properties"/></div>
+                                    <div class="col-lg-4 col-sm-5"><img src="../img/properties/1.jpg" class="img-responsive img-circle" alt="properties"/></div>
                                     <div class="col-lg-8 col-sm-7">
                                       <h5><a href="/buysalerent">4bedrooms Duplex</a></h5>
                                       <p class="price">#550,000,000</p> </div>
                                   </div>
                     
                     <div class="row">
-                                    <div class="col-lg-4 col-sm-5"><img src="../images/properties/3.jpg" class="img-responsive img-circle" alt="properties"/></div>
+                                    <div class="col-lg-4 col-sm-5"><img src="../img/properties/3.jpg" class="img-responsive img-circle" alt="properties"/></div>
                                     <div class="col-lg-8 col-sm-7">
                                       <h5><a href="/buysalerent">Mansion</a></h5>
                                       <p class="price">#900,000,000</p> </div>
                                   </div>
                     
                     <div class="row">
-                                    <div class="col-lg-4 col-sm-5"><img src="../images/properties/2.jpg" class="img-responsive img-circle" alt="properties"/></div>
+                                    <div class="col-lg-4 col-sm-5"><img src="../img/properties/2.jpg" class="img-responsive img-circle" alt="properties"/></div>
                                     <div class="col-lg-8 col-sm-7">
                                       <h5><a href="/buysalerent">5bedrooms Duplex</a></h5>
                                       <p class="price">#700,000,000</p> </div>
@@ -80,7 +80,7 @@
                                     <p><%- property.description %></p>
                                     <p class="area">
                                         <span class="glyphicon glyphicon-map-marker"></span>
-                                        <%- property.address %><%- property.countryCity %> <%- property.countryState %> <%- property.country %>
+                                        <%- property.address %> <%- property.city %> <%- property.state %> <%- property.country %>
                                     </p>
                                     <div class="profile">
                                         <span class="glyphicon glyphicon-user"></span> Agent Details
@@ -91,7 +91,7 @@
                                 <h6><span class="glyphicon glyphicon-home"></span> Availability</h6>
                                 <div class="listing-detail">
                                     <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room"><%- property.bedrooms %></span>
-                                    <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room"><%- property.rooms %></span>
+                                    <span data-toggle="tooltip" data-placement="bottom" data-original-title="Swimming Pool"><%- property.pool %></span>
                                     <span data-toggle="tooltip" data-placement="bottom" data-original-title="Parking"><%- property.garages %></span>
                                     <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bathrooms"><%- property.bathrooms %></span>
                                 </div>
@@ -106,7 +106,7 @@
                         <div class="property-spacing"></div>
                     <% }) %>
                 <% } else { %>
-                    <h2 style="color:#64a30a;">No <%- propertyType %> found in <%- countryCity %> for your search</h2>
+                    <h2 style="color:#64a30a;">No <%- amount %> <%- propertyType %> found in <%- city %> for your search</h2>
                 <% } %>
 
               

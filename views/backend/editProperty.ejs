@@ -1,258 +1,262 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://bootswatch.com/4/journal/bootstrap.min.css">
-  <script>document.getElementsByTagName("html")[0].className += " js";</script>
-  <link rel="icon" href="../images/logos.jpg">
-  <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/stylesheet.css">
-  <title>Edit Property</title>
- 
-</head>
-<body>
-  <%- include(`partials/header2`); -%>
-  
-  <main class="cd-main-content">
-    <%- include(`partials/sidebar`); -%>
-  
-    <div class="cd-content-wrapper">
-      <div class="text-component text-center">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Korex Hospital</title>
+    <!-- base:css -->
+    <link rel="stylesheet" href="../../font/typicons.css">
+    <link rel="stylesheet" href="../../css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="../../vertical-layout-light/style.css">
+    <!-- endinject -->
+    <link rel="icon" href="../../img/logos.jpg">
+  </head>
+  <body>
+    <div class="container-scroller">
+      <!-- partial:partials/_navbar.html -->
+      <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
 
-        <div class="headers">
-
-          <h3 class="text-box1">Edit Properties </h3>
-          <div class="bottom-left">We are glad to see you again!</div>
-
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+          <a class="navbar-brand brand-logo" href="/backend/dashboard"><img src="../../img/logos.jpg" alt="logo"/></a>
+          <a class="navbar-brand brand-logo-mini" href="/backend/dashboard"><img src="../../img/logos.jpg" alt="logo"/></a>
+          <button class="navbar-toggler navbar-toggler align-self-center d-none d-lg-flex" type="button" data-toggle="minimize">
+            <span class="typcn typcn-th-menu"></span>
+          </button>
         </div>
 
-        <%- include (`./partials/messages`); -%>
+        <%- include ('../partials/adminNav'); -%>
+      </nav>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_settings-panel.html -->
+        <div class="theme-setting-wrapper">
+          <div id="settings-trigger"><i class="typcn typcn-cog-outline"></i></div>
+          <div id="theme-settings" class="settings-panel">
+            <i class="settings-close typcn typcn-delete-outline"></i>
+            <p class="settings-heading">SIDEBAR SKINS</p>
+            <div class="sidebar-bg-options" id="sidebar-light-theme">
+              <div class="img-ss rounded-circle bg-light border mr-3"></div>
+              Light
+            </div>
+            <div class="sidebar-bg-options selected" id="sidebar-dark-theme">
+              <div class="img-ss rounded-circle bg-dark border mr-3"></div>
+              Dark
+            </div>
+            <p class="settings-heading mt-2">HEADER SKINS</p>
+            <div class="color-tiles mx-0 px-4">
+              <div class="tiles success"></div>
+              <div class="tiles warning"></div>
+              <div class="tiles danger"></div>
+              <div class="tiles primary"></div>
+              <div class="tiles info"></div>
+              <div class="tiles dark"></div>
+              <div class="tiles default border"></div>
+            </div>
+          </div>
+        </div>
+        <!-- partial -->
+        <!-- partial:partials/_sidebar.html -->
+        <%- include('../partials/adminSidebar'); -%>
 
-        <div class="flex-banner-container">
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
 
-            <div class="main-properties">
-                <form action="/editProperty/<%- properties._id %>" method="post">
-                    <div class="edit-property1">
-                        <div class="edit-property-box1">
+              
+                <%- include (`../partials/messages`); -%>
 
-                            <label class="labelinput">Agent Fullname</label><br>
-                            <input class="editinput" type="text" name="contactPerson"
-                            value="<%- properties.contactPerson %>" required>
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card">
+                         <div class="card-body">
+                           <h4 class="card-title">Edit Property Information</h4>
     
-                            <br> <label class="labelinput">House Description</label>
-                            <br><input class="editinput" type="text" name="description"
-                            value="<%- properties.description %>" required>
-    
-                            <% let propertyType=["Apartment", "Loft", "Office","House","Bungalow","Land"] %>
+                           <form class="forms-sample" action="/backend/editPropertyPagePost/<%- properties._id %>" method="post" enctype="multipart/form-data">
 
-                            <br> <label class="labelinput">Property Type</label>
-                            <br><select class="editinput" style="margin-top:-0.50px" name="propertyType">
-                            <option value="<%- properties.propertyType %>"><%- properties.propertyType %></option>
-
-                                <% propertyType.forEach((so)=> { %>
-                                    <option value="<%- so %>"><%- so %></option>
-
+                            <div class="form-group">
+                               <label for="exampleInputName1">Agent Name</label>
+                               <input type="text" class="form-control" name="contactPerson"
+                               value="<%- properties.contactPerson %>" readonly/>
+                            </div>
+                            <div class="form-group">
+                                <% let propertyType=["Apartment", "Loft", "Office","House","Bungalow","Land"] %>
+                                <label for="exampleSelectGender">Select Property Type</label>
+                                <select class="form-control" name="propertyType">
+                                    <% propertyType.forEach((type) => { %>
+                                        <option value="<%- type %>"<% if (properties && properties.propertyType === type) { %> selected<% } %>><%- type %></option>
                                     <% }) %>
-
-                            </select>
-
-
-                        </div>
-                        <div class="edit-property-box2">
-
-                            <label class="labelinput">Property Price</label>
-                            <br><input class="editinput" type="text" name="amount"
-                            value="<%- properties.amount %>" required>
-
-                            <% let houseCondition=["New", "Renovated", "Old" ] %>
-
-                             <label class="labelinput">House Condition</label>
-                            <br><select class="editinput" style="margin-top:-0.50px" name="houseCondition">
-                            <option value="<%- properties.houseCondition %>"><%- properties.houseCondition %></option>
-
-                                <% houseCondition.forEach((so)=> { %>
-                                    <option value="<%- so %>"><%- so %></option>
-
-                                    <% }) %>
-
-                            </select>
-
-                                    <br><label class="labelinput">Yearly Tax Rate</label>
-                                    <br><input class="editinput" type="text" name="tax"
-                                        value="<%- properties.tax %>" required /><br>
-
-                        </div>
-                        
-
-                    </div>
-
-                    <div class="edit-property2">
-
-                        <div class="edit-property-box1">
-
-                            <% let propertyStatus=["Shortlet", "For Rent","For Sale", "Sold" ] %>
-
-                             <label class="labelinput">Property Status</label>
-                             <select class="editinput" style="margin-top:-0.50px" name="propertyStatus">
-                            <option value="<%- properties.propertyStatus %>"><%- properties.propertyStatus %></option>
-
-                                <% propertyStatus.forEach((so)=> { %>
-                                    <option value="<%- so %>"><%- so %></option>
-
-                                    <% }) %>
-
-                            </select>
-    
-                            <label class="labelinput">Agent Number</label>
-                            <br><input class="editinput" type="text" name="agentNumber"
-                            value="<%- properties.agentNumber %>" required>
-    
-                            <label class="labelinput">Property Address</label>
-                            <input class="editinput" type="text" name="address"
-                            value="<%- properties.address %>" required>
-
-
-                        </div>
-
-                        <div class="edit-property-box2">
-
-                            <% let countryState=["Lagos", "Ogun State"] %>
-
-                            <label class="labelinput">State</label>
-                            <select class="editinput" style="margin-top:-0.50px" name="countryState">
-                            <option value="<%- properties.countryState %>"><%- properties.countryState %></option>
-
-                                <% countryState.forEach((so)=> { %>
-                                    <option value="<%- so %>"><%- so %></option>
-
-                                    <% }) %>
-
-                            </select>
-    
-                            <% let countryCity=["Lagos Island", "Ikeja", "Victoria Island", "Ikoyi", "Apapa", "Surulere", "Yaba", "Agege", "Ikorodu", "Badagry", "Epe", "Festac Town", "Lekki", "Ajah", "Maryland", "Oshodi", "Mushin", "Bariga", "Ojodu", "Alimosho", "Egbeda", "Ikotun", "Isheri-Olofin", "Ketu", "Isolo", "Okota", "Ojo", "Alaba"] %>
-
-                            <label class="labelinput">City</label>
-                            <select class="editinput" style="margin-top:-0.50px" name="countryCity">
-                            <option value="<%- properties.countryCity %>"><%- properties.countryCity %></option>
-
-                                <% countryCity.forEach((so)=> { %>
-                                    <option value="<%- so %>"><%- so %></option>
-
-                                    <% }) %>
-
-                            </select>
-
-                            <br> <label class="labelinput">Size in ft (only numbers)</label>
-                            <br><input class="editinput" type="number" name="sizeinFt"
-                            value="<%- properties.sizeinFt %>" required>
-
-                        </div>
-
-                        
-                    </div>
-
-                    <!-- <div class="edit-property1"></div> -->
-
-                    <div class="edit-property3">
-                       
-
-                            <div class="edit-property-box1">
-
-                                <label class="labelinput">Property Header</label>
-                                <input class="editinput" type="text" name="heading"
-                                value="<%- properties.heading %>" required>
-        
-                                <br> <label class="labelinput">Rooms</label>
-                                <br><input class="editinput" type="text" name="rooms"
-                                value="<%- properties.rooms %>" required>
-        
-                                <br> <label class="labelinput">Bedrooms</label>
-                                <br><input class="editinput" type="text" name="bedrooms"
-                                value="<%- properties.bedrooms %>" required>
-        
-        
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="exampleInputEmail3">Property Price</label>
+                                <input type="text" class="form-control" name="amount" 
+                                value="<%- properties.amount %>"/>
                             </div>
 
+                            <div class="form-group">
+                                <% let houseCondition=["New", "Renovated", "Old" ] %>
+                                <label for="exampleSelectGender">Select Property Condition</label>
+                                <select class="form-control" name="houseCondition">
+                                    <% houseCondition.forEach((type) => { %>
+                                        <option value="<%- type %>"<% if (properties && properties.houseCondition === type) { %> selected<% } %>><%- type %></option>
+                                    <% }) %>
+                                </select>
+                            </div>
 
-                      
-                        <div class="edit-property-box2">
+                            <div class="form-group">
+                                <% let propertyStatus=["Shortlet", "For Rent","For Sale", "Sold" ] %>
+                                <label for="exampleSelectGender">Select Property Status</label>
+                                <select class="form-control" name="propertyStatus">
+                                    <% propertyStatus.forEach((type) => { %>
+                                        <option value="<%- type %>"<% if (properties && properties.propertyStatus === type) { %> selected<% } %>><%- type %></option>
+                                    <% }) %>
+                                </select>
+                            </div>
 
-                                <label class="labelinput">Bathrooms</label>
-                                <br><input class="editinput" type="text" name="bathrooms"
-                                value="<%- properties.bathrooms %>" required>
-        
-                                <label class="labelinput">Garages</label>
-                                <br><input class="editinput" type="text" name="garages"
-                                value="<%- properties.garages %>" required>
-        
-                                <br><label class="labelinput">Garage size </label>
-                                <br><input class="editinput" type="text" name="garageSize"
-                                     value="<%- properties.garageSize %>" required /><br>
-        
-                           
-                        </div>
-                        
+                            <div class="form-group">
+                                <label for="exampleInputCity1">Agent Number</label>
+                                <input type="text" class="form-control"name="agentNumber"
+                                value="<%- properties.agentNumber %>" readonly/>
+                            </div>
 
+                            <div class="form-group">
+                                <label for="exampleInputCity1">Address</label>
+                                <input type="text" class="form-control" name="address"
+                                value="<%- properties.address %>" />
+                            </div>
+
+                            <div class="form-group">
+                                <% let city=["Lagos Island", "Ikeja", "Victoria Island", "Ikoyi", "Apapa", "Surulere", "Yaba", "Agege", "Ikorodu", "Badagry", "Epe", "Festac Town", "Lekki", "Ajah", "Maryland", "Oshodi", "Mushin", "Bariga", "Ojodu", "Alimosho", "Egbeda", "Ikotun", "Isheri-Olofin", "Ketu", "Isolo", "Okota", "Ojo", "Alaba"] %>
+                                <label for="exampleSelectGender">Select Property City</label>
+                                <select class="form-control" name="city">
+                                    <% city.forEach((type) => { %>
+                                        <option value="<%- type %>"<% if (properties && properties.city === type) { %> selected<% } %>><%- type %></option>
+                                    <% }) %>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <% let state=["Lagos", "Ogun State"] %>
+                                <label for="exampleSelectGender">Select Property State</label>
+                                <select class="form-control" name="state">
+                                    <% state.forEach((type) => { %>
+                                        <option value="<%- type %>"<% if (properties && properties.state === type) { %> selected<% } %>><%- type %></option>
+                                    <% }) %>
+                                </select>
+                            </div>
+                              
+                            <div class="form-group">
+                                <label for="exampleInputCity1">Country</label>
+                                <input type="text" class="form-control" name="country"
+                                value="<%- properties.country %>" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputCity1">Property Heading</label>
+                                <input type="text" class="form-control" name="heading" 
+                                value="<%- properties.heading %>" />
+                            </div>
+                              
+                            <div class="form-group">
+                                <label for="exampleInputCity1">Size in ft</label>
+                                <input type="text" class="form-control" name="sizeinFt"
+                                value="<%- properties.sizeinFt %>" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputCity1">Bedrooms</label>
+                                <input type="text" class="form-control" name="bedrooms"
+                                value="<%- properties.bedrooms %>" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputCity1">Bathrooms</label>
+                                <input type="text" class="form-control" name="bathrooms"
+                                value="<%- properties.bathrooms %>" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputCity1">Garages</label>
+                                <input type="text" class="form-control" name="garages"
+                                value="<%- properties.garages %>" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputCity1">Swimming Pool</label>
+                                <input type="text" class="form-control" name="pool"
+                                value="<%- properties.pool %>" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputCity1">Year Built</label>
+                                <input type="number" class="form-control" name="yearBuilt"
+                                value="<%- properties.yearBuilt %>" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputCity1">Available From</label>
+                                <input type="date" class="form-control" name="availableFrom"
+                                value="<%- properties.availableFrom %>" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputCity1">Property Description</label>
+                                <textarea class="form-control" rows="4" name="description"  ><%- properties.description %></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputCity1">Property Image</label>
+                                <input type="file" class="form-control" name="images" accept="image/*" multiple>
+                              </div>
+                            <input type="hidden" name="existingImage" value="<%- JSON.stringify(properties.image || {}) %>">
+
+                            <div class="form-group">
+                                <label>Current Image</label>
+                                <div>
+                                    <!-- Render the table here showing images in array -->
+                                    
+                                    <% if (properties.images && properties.images.length > 0) { %>
+                                        <% properties.images.forEach(image => { %>
+                                            <img class="propertimg" src="data:<%= image.contentType %>;base64,<%= image.data.toString('base64') %>">
+                                        <% }); %>
+                                    <% } else { %>
+                                        No images to display
+                                    <% } %>
+
+                                </div>
+                            </div>
+ 
+                             <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                             <button class="btn btn-light">Cancel</button>
+                           </form>
+                         </div>
                     </div>
-
-                    <div class="edit-property4">
-
-                        <div class="edit-property-box1">
-
-                            <label class="labelinput">Year built (numeric)</label>
-                            <br><input class="editinput" type="number" name="yearBuilt"
-                            value="<%- properties.yearBuilt %>" required>
-
-                            <label class="labelinput">Available from (date)</label>
-                            <br><input class="editinput" type="date" name="availableFrom"
-                            value="<%- properties.availableFrom %>" required>
-    
-                            
-    
-                            <label class="labelinput">Property Basement</label>
-                            <input class="editinput" type="text" name="basement"
-                            value="<%- properties.basement %>" required>
+                </div>
 
 
-                        </div>
+                  
+          
+                
 
-                        <div class="edit-property-box2">
+              
+            
 
-                            <label class="labelinput">Property Roofing</label>
-                            <br><input class="editinput" type="text" name="roofing"
-                            value="<%- properties.roofing %>" required>
-    
-                            <label class="labelinput">Exterior Material</label>
-                            <br><input class="editinput" type="text" name="exteriorMaterial"
-                            value="<%- properties.exteriorMaterial %>" required>
+        
+         </div>
+      
+         <%- include (`../partials/adminFooter`); -%>
 
-                     
-                            <button class="submit-btn">Update Property</button>
-                           
-                        </div>
-                        
-                    </div>
-                    
-
-
-
-
-
-                </form>
-            </div>            
         </div>
-        
+
       </div>
-    </div> <!-- .content-wrapper -->
-  </main> <!-- .cd-main-content -->
-  <script src="../assets/js/loopple/forminput.js"></script>   <!-- addPropertyForm -->
-  <script src="../js/util.js"></script> <!-- util functions included in the CodyHouse framework -->
-  <script src="../js/menu-aim.js"></script>
-  <script src="../js/main.js"></script>
-</body>
+ 
+    </div>
+
+  
+ 
+
+ 
+
+  </body>
 </html>

@@ -9,22 +9,22 @@
 <div class="col-lg-3 col-sm-4 ">
 
   <div class="search-form"><h4><span class="glyphicon glyphicon-search"></span> Search</h4>
-    <form action="/searchProperty" method="post">
+    <form action="/searchPropertyPage" method="post">
     <input type="text" class="form-control" placeholder="Search for Properties" readonly>
     <div class="row">
             <div class="col-lg-5">
               <% let propertyStatus=["Shortlet", "For Rent","For Sale"] %>
               <select class="form-control" name="propertyStatus" required>
-                <% propertyStatus.forEach((so)=> { %>
-                  <option value="<%- so %>"><%- so %></option>
+                <% propertyStatus.forEach((type)=> { %>
+                  <option value="<%- type %>"><%- type %></option>
               <% }) %>
               </select>
             </div>
             <div class="col-lg-7">
-              <% let amount=["#50,000,000", "#100,000,000", "#200,000,000","#300,000,000","Above"] %>
+              <% let amount=["Below #50,000,000","#50,000,000", "#100,000,000", "#200,000,000","#300,000,000","Above"] %>
               <select class="form-control" name="amount" required>
-                <% amount.forEach((so)=> { %>
-                  <option value="<%- so %>"><%- so %></option>
+                <% amount.forEach((type)=> { %>
+                  <option value="<%- type %>"><%- type %></option>
               <% }) %>
               </select>
             </div>
@@ -34,16 +34,16 @@
           <div class="col-lg-5">
             <% let propertyType=["Apartment", "Loft", "Office","House","Bungalow","Land"] %>
             <select  class="form-control" name="propertyType" required>
-                <% propertyType.forEach((so)=> { %>
-               <option value="<%- so %>"><%- so %></option>
+                <% propertyType.forEach((type)=> { %>
+               <option value="<%- type %>"><%- type %></option>
            <% }) %>
            </select>
           </div>
           <div class="col-lg-7">
-            <% let countryCity=["Lagos Island", "Ikeja", "Victoria Island", "Ikoyi", "Apapa", "Surulere", "Yaba", "Agege", "Ikorodu", "Badagry", "Epe", "Festac Town", "Lekki", "Ajah", "Maryland", "Oshodi", "Mushin", "Bariga", "Ojodu", "Alimosho", "Egbeda", "Ikotun", "Isheri-Olofin", "Ketu", "Isolo", "Okota", "Ojo", "Alaba"] %>
-            <select class="form-control" name="countryCity" required>
-              <% countryCity.forEach((so)=> { %>
-                <option value="<%- so %>"><%- so %></option>
+            <% let city=["Lagos Island", "Ikeja", "Victoria Island", "Ikoyi", "Apapa", "Surulere", "Yaba", "Agege", "Ikorodu", "Badagry", "Epe", "Festac Town", "Lekki", "Ajah", "Maryland", "Oshodi", "Mushin", "Bariga", "Ojodu", "Alimosho", "Egbeda", "Ikotun", "Isheri-Olofin", "Ketu", "Isolo", "Okota", "Ojo", "Alaba"] %>
+            <select class="form-control" name="city" required>
+              <% city.forEach((type)=> { %>
+                <option value="<%- type %>"><%- type %></option>
             <% }) %>
             </select>
           </div>
@@ -120,7 +120,7 @@
                   <p class="price">Price: <%- properties[i].amount %></p>
                   <div class="listing-detail">
                     <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room"><%- properties[i].bedrooms %></span>
-                    <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room"><%- properties[i].rooms %></span>
+                    <span data-toggle="tooltip" data-placement="bottom" data-original-title="Swimming Pool"><%- properties[i].pool %></span>
                     <span data-toggle="tooltip" data-placement="bottom" data-original-title="Parking"><%- properties[i].garages %></span>
                     <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bathrooms"><%- properties[i].bathrooms %></span>
                   </div>
@@ -144,7 +144,7 @@
                   <p class="price">Price: <%- properties[i + 1].amount %></p>
                   <div class="listing-detail">
                     <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room"><%- properties[i + 1].bedrooms %></span>
-                    <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room"><%- properties[i + 1].rooms %></span>
+                    <span data-toggle="tooltip" data-placement="bottom" data-original-title="Swimming Pool"><%- properties[i + 1].pool %></span>
                     <span data-toggle="tooltip" data-placement="bottom" data-original-title="Parking"><%- properties[i + 1].garages %></span>
                     <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bathrooms"><%- properties[i + 1].bathrooms %></span>
                   </div>

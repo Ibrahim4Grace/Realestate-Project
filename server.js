@@ -11,6 +11,7 @@ const flash = require('connect-flash');
 const passport = require("passport")
 const morgan = require('morgan');
 const nodmon = require('nodemon');
+const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const session = require(`express-session`)
 const methodOverride = require('method-override');
@@ -18,6 +19,12 @@ const cors = require('cors');
 const app = express();
 const agentApiRoute = require('./route/agentApiRoute');
 
+// Set no-cache headers middleware
+app.use((req, res, next) => {
+  res.header('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+  res.header('Pragma', 'no-cache');
+  next();
+});
 
 
 const trustedOrigins = [process.env.BASE_URL];
@@ -71,6 +78,7 @@ app.set(`view engine`, `ejs`);
 //TO BE ABLE TO ACCESS OUR STATIC FILES -- IMG, CSS, VIDEOS
 app.use(express.static(__dirname + "/public/"));
 app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 
 app.use(flash())
