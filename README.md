@@ -13,6 +13,7 @@ Email Notifications: Receive notifications in your email inbox using Nodemailer.
 
 Technologies Used
 
+- JavaScript
 - Node.js
 - Express.js
 - EJS (Embedded JavaScript)
